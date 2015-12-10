@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {A}Introduction}{5}
+\contentsline {subsection}{\numberline {A.1}Motivation}{5}
+\contentsline {subsection}{\numberline {A.2}Problem Statement}{5}
+\contentsline {subsection}{\numberline {A.3}Contribution}{5}
+\contentsline {subsection}{\numberline {A.4}Structure of the Thesis}{5}
+\contentsline {section}{\numberline {B}State of Art}{7}
+\contentsline {subsection}{\numberline {B.1}Log Data Management}{7}
+\contentsline {section}{\numberline {C}System Design}{8}
+\contentsline {subsection}{\numberline {C.1}System Design}{8}
+\contentsline {section}{\numberline {D}System Implementation}{9}
+\contentsline {subsection}{\numberline {D.1}System Implementation}{9}
+\contentsline {section}{\numberline {E}Evaluation and Results}{10}
+\contentsline {subsection}{\numberline {E.1}Evaluation}{10}
+\contentsline {section}{\numberline {F}Conclusion and Future Work}{11}
+\contentsline {subsection}{\numberline {F.1}Conclusion and Future Work}{11}

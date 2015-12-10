@@ -1,5 +1,7 @@
-\documentclass[article,dr=phil,type=drfinal,colorback,accentcolor=tud7b]{tudthesis}
+\documentclass[article,type=msc,colorback,accentcolor=tud7b]{tudthesis}
 \usepackage{ngerman}
+\usepackage[english]{babel}
+
 
 \newcommand{\getmydate}{%
   \ifcase\month%
@@ -13,93 +15,145 @@
 \begin{document}
   \thesistitle{Feedback Driven Development of Cloud Applications} 
   %\linebreak[1]Corporate-Design f"ur {\LaTeX}!}%
-    {The Fabulous Benner Boys present lordly the {\LaTeX} TUD corporate design!}
-  \author{Johnnie Walker}
-  \birthplace{Darmstadt}
-  \referee{Clemens v. Loewenich}{Johannes Werner}[another one]
-  \department{Fachbereich Physik}
-  \group{Institut f"ur Angewandte Festkernphysik\\Speerspitze der Elite}
-  \dateofexam{\today}{\today}
+    {Feedback Driven Development of Cloud Applications}
+  \author{Harini Gunabalan}
+  \birthplace{}
+  \referee{Prof. Dr.-Ing. Mira Mezini}{Dr. Guido Salvaneschi}
+  \department{Department of Computer Science}
+  \group{Software Technology Group}
+  \dateofexam{31 May 2015}{31 May 2015}
   \tuprints{12345}{1234}
   \makethesistitle
-  \affidavit{J. Walker}
+  \affidavit{Harini Gunabalan}
 
-  \section{Generelle Informationen}
-    Die Klasse basiert auf der \textaccent{tudreport}-Klasse von C. v. Loewenich und
-    J. Werner. Alle "Anderungen dort wirken sich direkt auf die
-    \textaccent{tudthesis}-Klasse aus. Genauer: die \textaccent{tudthesis}-Klasse definiert nur einige
-    neue Befehle und legt die Formatierung der ersten zwei Seiten (Titelseite
-    und R"uckseite des Titleblattes) fest. \textbf{Alle Vordefinierten Texte sind, wie verbindlich vorgeschrieben, in der hessischen Amtssprache
-    gehalten\footnote{Deutschland hat (noch) keine Amtssprache.}.}
 
-  \section{Verwendung der Klasse}
-    Die Klasse wird verwendet, indem in der Dokumentenpr"aambel
-    \textaccent{\textbackslash documentclass\{tudthesis\}}
-    eingetragen wird.
+\begin{abstract}
+\begin{large} 
+	
+Over the last few years, the Cloud Computing Paradigm has gained a lot of importance in both the Academia and the Industry. The cloud has not only changed the IT Landscape from the user's perspective but has also changed how the Developers develop applications on the cloud. The increasing adoption of the DevOps approach has led to the removal of the boundaries between the development and the operations. 
 
-  \subsection{Klassenoptionen}
-    Die Klasse unterst"utzt alle Klassenoptionen der tudreport-Klasse.
-    \paragraph{Neue Optionen}
-    \begin{itemize}
-      \item \textbf{type=<dr|drfinal|diplom|msc|pp|bsc|sta>}\\
-        Hiermit wird die Art der Arbeit angegeben. Dies legt verschiedene
-        Formatierungen fest.\\
-        \begin{tabular}{ll}
-        \textaccent{dr} &f"ur eingereichte Dissertationen\\
-        \textaccent{drfinal} &f"ur genehmigte Dissertationen\\
-        \textaccent{diplom} &f"ur Diplomarbeiten\\
-        \textaccent{msc} &f"ur Master-Theses\\
-        \textaccent{pp} &f"ur Project-Proposals\\
-        \textaccent{bsc} &f"ur Bachelor-Theses\\
-        \textaccent{sta} &f"ur Studienarbeiten
-        \end{tabular}
-      \item \textbf{dr=<rernat|ing|phil>}\\
-        Hiermit wird die Art des Doktorgrads angegeben.\\
-        \begin{tabular}{ll}
-        \textaccent{rernat} &f"ur Dr. rer. nat.\\
-        \textaccent{ing} &f"ur Dr.-Ing.\\
-        \textaccent{phil} &f"ur Dr. phil.
-        \end{tabular}\\
-        F"ur den Fall, dass der gew"unschte Titel nicht vorhanden ist, gibt
-        es den Befehl \textbf{\textbackslash drtext\{\#1\}}, wobei \#1 z.B.
-        \glqq Zur Erlangung des Grades eines Doktors der
-        Technischen Wissenschaften (Dr.\ rer.\ tech.)\grqq\ ist.
-    \end{itemize}
+\par Among the the three levels of the Cloud Computing: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service(PaaS) and Software-as-a-Service(SaaS), Software Developers are mainly concerned with the PaaS which allows them to focus on the Application Development. Leveraging the fact that the Application is hosted on the cloud, there are additional metrics regarding the application available to Developers in different Log formats. There are also Cloud Monitoring Tools which consolidates these logs with a huge volume of data representing the run-time metrics etc. of the cloud applications. Though monitoring of the cloud applications has been done by many tools, most of the developers do not go through the cumbersome error/warning log data.
+These log data are not visually made available to the developers in their Development Environment.
 
-  \subsection{Befehle}
-    \begin{itemize}\itemsep-0.5\parsep
-      \item \textbf{\textbackslash thesistitle\{\#1\}\{\#2\}}\\
-        \#1: Titel der Arbeit in der Erstsprache (z.B. Deutsch)\\
-        \#2: Titel der Arbeit in der zweiten Sprache (z.B. Englisch)
-      \item \textbf{\textbackslash makethesistitle}\\
-        Erzeugt die korrekte Titelseite
-      \item \textbf{\textbackslash author\{\#1\}}\\
-        \#1: Name des Autors
-      \item \textbf{\textbackslash birthplace\{\#1\}}\\
-        \#1: Geburtsort des Autors (bei Dr.-Arbeit verbindlich)
-      \item \textbf{\textbackslash date\{\#1\}}\\
-        Standard ist der aktuelle Monat und das aktuelle Jahr (z.B. \getmydate)\\
-        \#1: individuelles Datum
-      \item \textbf{\textbackslash referee\{\#1\}\{\#2\}[\#3]}\\
-        Namen der Gutachter, (3. Gutachter optional)
-      \item \textbf{\textbackslash department\{\#1\}}\\
-        Fachbereich an dem die Arbeit durchgef"uhrt wurde. Standard ist
-        \glqq Fachbereich Physik\grqq.
-      \item \textbf{\textbackslash group\{\#1\}}\\
-        Arbeitsgruppe / Institut an dem die Arbeit durchgef"uhrt wurde
-      \item \textbf{\textbackslash dateofexam\{\#1\}\{\#2\}}\\
-        \#1: Tag der Einreichung der Arbeit\\
-        \#2: Tag der Pr"ufung / Tag des Abschlusses\\
-        \textaccentcolor{Wird nur bei \textaccent{type=drfinal} verwendet.
-        Ansonsten wird ein leeres Feld erzeugt, in das bei Abgabe der 
-        Arbeit ein Stempel gesetzt wird.}
-      \item \textbf{\textbackslash tuprints\{\#1\}\{\#2\}}\\
-        \#1: \textaccent{<URN-ID>} aus \textaccent{urn:nbn:de:tuda-tuprints-<URN-ID>}\\
-        \#2: \textaccent{<tuprints-ID>} aus \textaccent{http://tuprints.ulb.tu-darmstadt.de/<tuprints-ID>}\\
-        Entspricht der Empfehlung auf der tuprints FAQ-Seite: \textaccent{http://tuprints.ulb.tu-darmstadt.de/faq.html\#urlreservation}
-      \item \textbf{\textbackslash affidavit[\#1]\{\#2\}}\\
-        \#1: Datum der Eigenst"andigkeitserkl"arung (optional)\\
-        \#2: Signatur unter der Unterschrift
-    \end{itemize}
+\par This Thesis work aims in bridging this issue. The focus is mainly to map the run-time metrics to the source code artifacts. Mapping will involve log data aggregation, code analysis techniques etc.	
+\end{large}
+\end{abstract}  
+
+\clearpage
+
+%=====INDEX================================================================================
+\setlength{ \parskip }{1em}
+\index{key}
+\tableofcontents 
+\cleardoublepage 
+
+\listoffigures
+\clearpage
+\appendix
+\cleardoublepage 
+
+% abstract, acknowledgements, contents
+ \section{Introduction}
+	
+	\par This chapter is structured into four sections. The first section provides the motivation of this thesis work. The second section gives an insight into the problem statement which this Thesis work aims to solve. The third section details the contribution of the work and the fourth section provides how the following chapters of the Thesis are structured.
+	
+	\subsection{Motivation}
+	
+	Software Engineering Practice in the industry has faced a phenomenal change since the advent of Cloud Computing. This is mainly due to the flexibility and the dynamic scaling up and scaling down of the infrastructure as required by the current workload. This proves to be not only elastic but cost-effective as well. It is quite obvious that this elasticity is achieved by the continuous monitoring of several metrics that indicate the demand at the moment, and provisioning the necessary resources to meet the monitored demand. Distributed, scalable enterprise-wide applications also mandate the monitoring of metrics for reasoning the effectiveness of the applications by engineers and business analysts [3].
+	
+	\par The metrics that are being monitored vary widely. For instance, the low-level metrics such as memory consumption, CPU utilization, Network bandwidth utilization could be considered to be at the Infrastructure level, whereas higher level metrics such as Response times of methods/procedures, the number of users accessing the application, maximum number of users who can use the application simultaneously could be considered to be at the application level. Sometimes, the application level metrics could depend on the primitive metrics at the infrastructure level as well.
+	
+	\par As Cloud Application Development has becoming more common, the run time monitoring metrics of these applications are available through several Application Performance Monitoring (APM) tools such as Amazon Cloudwatch, New Relic, etc. But, they do not provide any valuable and visible feedback to the developers, and hence most of the cloud developers do not use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that is taking a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment. This type of analytic and predictive feedback should be provided to the developers in their IDEs which otherwise may not be explored by the developers. This technique of utilizing the monitoring data is known Feedback driven development. Feedback Driven Development that provides visual tools to the cloud developers is the focus of this thesis research.	
+	
+	\subsection{Problem Statement}	
+	
+The Cloud computing paradigms are further classified into three service models which forms a stack as shown: 
+\begin{itemize}
+	
+	\item Infrastructure-as-a-Service
+	
+	\item Platform-as-a-Service
+	
+	\item Software-as-a-Service  
+% add the stack image 	
+\end{itemize}
+	
+From the software engineering perspective, it is important to note how Cloud Computing impacts the development practices. Based on the research conducted, there are two important research issues [2]. 
+
+\begin{itemize}
+
+	
+	\item Impact of DevOps on Cloud Application Developers:	
+	The Cloud Developers are forced to look into the huge log data of the cloud applications.
+	
+	\item Data and Tools utilized by Cloud Developers:
+	The data produced by the logs include Business Metrics, System-level Data etc. Sometimes the implementation changes may even have monetary consequences in the cloud, nevertheless most of the developers do not pay attention to this aspect.  
+	
+	
+	
+\end{itemize}
+ 
+	
+	\subsection{Contribution}
+	
+	\subsection{Structure of the Thesis}
+
+	\par This thesis is structured in six chapters. Chapter 1 provides a short introduction into the topic and describes the goals of the thesis. Chapter 2 includes more background information and presents the state of the art of the important topics of this thesis: Cloud Application Performance Monitoring(AMP) tools, Feedback Driven Development(FDD) in general, and how FDD could be useful for Cloud Application Developers. The third Chapter describes an overview of the high-level System Design and the design decisions made in this research work. The fourth chapter explains the system on a lower fine-grained level. Interesting Implementation details are also provided here. Chapter 5 shows the various case studies, evaluates the developed system and illustrates its usage as well as possible applications. Finally, Chapter six provides the conclusion of the thesis and outlines the future work ideas.
+
+% Example of Footnote    
+%     \textbf{Alle Vordefinierten Texte sind, wie verbindlich vorgeschrieben, in der hessischen Amtssprache
+%    gehalten\footnote{Deutschland hat (noch) keine Amtssprache.}.}
+
+	\cleardoublepage
+
+ \section{State of Art}
+
+    
+	\subsection{Log Data Management}	
+	
+	
+ \cleardoublepage
+ \section{System Design}	
+ \subsection{System Design}
+
+ \cleardoublepage
+ \section{System Implementation}
+ \subsection{System Implementation}
+
+ \cleardoublepage	  
+ \section{Evaluation and Results}	  
+ \subsection{Evaluation}
+ 
+ \cleardoublepage
+ \section{Conclusion and Future Work}	  
+ \subsection{Conclusion and Future Work}
+
+\clearpage
+	  
+%=====BIBLIOGRAPHY================================================================================
+\bibliography{LatexRefThesis.bib}
+\bibliographystyle{plain}
+
+\begin{thebibliography}{1}
+\bibitem{}
+	Cito J, Leitner P, Gall HC, Dadashi A, Keller A, Roth A.
+	\emph { Runtime Metric Meets Developer - Building Better Cloud Applications Using Feedback }. 
+	Onward! 2015 - Proceedings.
+	
+	\bibitem{Pfitzmann 2008}
+	Cito J, Leitner P, Gall HC, Fritz T.
+	\emph { The Making of Cloud Applications - An Empirical Study on
+Software Development for the Cloud}. 
+	ESEC/FSE'15 conference.
+	
+	\bibitem{Pfitzmann 2008}
+	Leitner, Philipp, et al. 
+	\emph { Application-level performance monitoring of cloud services based on the complex event processing paradigm}. 
+	Service-Oriented Computing and Applications (SOCA), 2012 5th IEEE International Conference on. IEEE, 2012.
+	
+ 	
+	
+	
+\end{thebibliography}	  
 
 \end{document}
