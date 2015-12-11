@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.7.10)  10 DEC 2015 14:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.7.10)  11 DEC 2015 22:04
 entering extended mode
 **TUDthesis.tex
 (C:\Users\D063995\git\MasterThesis\tuddesign\doc\latex\tuddesign\TUDthesis.tex
@@ -871,7 +871,7 @@ Package pdftex.def Info: by-nc-nd.pdf used on input line 26.
 
 
 ]
-LaTeX Font Info:    Try loading font information for TS1+5ch on input line 73.
+LaTeX Font Info:    Try loading font information for TS1+5ch on input line 74.
 
 ("C:\Program Files\tuddesign\tex\latex\tex-tudfonts\softmake\charter\ts15ch.fd"
 File: ts15ch.fd 2008/06/23 Fontinst v1.927 font definitions for TS1/5ch.
@@ -918,7 +918,7 @@ ts/type1/softmake/charter/5chri8a.pfb><C:/Program Files/tuddesign/fonts/type1/s
 oftmake/frontpage/5fpm8a.pfb><C:/Program Files/tuddesign/fonts/type1/softmake/f
 rontpage/5fpr8a.pfb><C:/Program Files/tuddesign/fonts/type1/softmake/stafford/5
 sfr8a.pfb>
-Output written on TUDthesis.pdf (14 pages, 123216 bytes).
+Output written on TUDthesis.pdf (14 pages, 124147 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
