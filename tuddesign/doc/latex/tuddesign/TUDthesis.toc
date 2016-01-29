@@ -1,15 +1,25 @@
 \contentsline {section}{\numberline {A}Introduction}{5}
 \contentsline {subsection}{\numberline {A.1}Motivation}{5}
-\contentsline {subsection}{\numberline {A.2}Problem Statement}{5}
-\contentsline {subsection}{\numberline {A.3}Contribution}{6}
-\contentsline {subsection}{\numberline {A.4}Structure of the Thesis}{6}
-\contentsline {section}{\numberline {B}State of Art}{7}
-\contentsline {subsection}{\numberline {B.1}Log Data Management}{7}
-\contentsline {section}{\numberline {C}System Design}{8}
-\contentsline {subsection}{\numberline {C.1}System Design}{8}
-\contentsline {section}{\numberline {D}System Implementation}{9}
-\contentsline {subsection}{\numberline {D.1}System Implementation}{9}
-\contentsline {section}{\numberline {E}Evaluation and Results}{10}
-\contentsline {subsection}{\numberline {E.1}Evaluation}{10}
-\contentsline {section}{\numberline {F}Conclusion and Future Work}{11}
-\contentsline {subsection}{\numberline {F.1}Conclusion and Future Work}{11}
+\contentsline {subsection}{\numberline {A.2}Problem Statement}{6}
+\contentsline {subsubsection}{\numberline {A.2.1}Continuous Delivery in Cloud Development}{6}
+\contentsline {subsubsection}{\numberline {A.2.2}Monitoring Metrics: Scalability and Availability of the Application}{7}
+\contentsline {subsubsection}{\numberline {A.2.3}Incorporating the collected Feedback in the Development Environment}{7}
+\contentsline {subsection}{\numberline {A.3}Contribution}{7}
+\contentsline {subsection}{\numberline {A.4}Structure of the Thesis}{8}
+\contentsline {section}{\numberline {B}State of the Art}{9}
+\contentsline {subsection}{\numberline {B.1}Feedback Driven Development }{9}
+\contentsline {subsubsection}{\numberline {B.1.1}Analytic FDD}{9}
+\contentsline {subsubsection}{\numberline {B.1.2}Predictive FDD}{9}
+\contentsline {subsection}{\numberline {B.2}Logging}{9}
+\contentsline {subsubsection}{\numberline {B.2.1}Logging Tools and Metrics}{10}
+\contentsline {subsubsection}{\numberline {B.2.2}Log Structure}{10}
+\contentsline {subsubsection}{\numberline {B.2.3}Performance related Logging}{10}
+\contentsline {subsubsection}{\numberline {B.2.4}Click Stream Logging}{10}
+\contentsline {section}{\numberline {C}System Design}{11}
+\contentsline {subsection}{\numberline {C.1}System Design}{11}
+\contentsline {section}{\numberline {D}System Implementation}{12}
+\contentsline {subsection}{\numberline {D.1}System Implementation}{12}
+\contentsline {section}{\numberline {E}Evaluation and Results}{13}
+\contentsline {subsection}{\numberline {E.1}Evaluation}{13}
+\contentsline {section}{\numberline {F}Conclusion and Future Work}{14}
+\contentsline {subsection}{\numberline {F.1}Conclusion and Future Work}{14}

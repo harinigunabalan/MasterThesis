@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{cito2014making}
+J{\"u}rgen Cito, Philipp Leitner, Thomas Fritz, and Harald~C Gall.
+\newblock The making of cloud applications an empirical study on software
+  development for the cloud.
+\newblock {\em arXiv preprint arXiv:1409.6502}, 2014.
+
+\bibitem{cito2015runtime}
+J{\"u}rgen Cito, Philipp Leitner, Harald~C Gall, Aryan Dadashi, Anne Keller,
+  and Andreas Roth.
+\newblock Runtime metric meets developer-building better cloud applications
+  using feedback.
+\newblock {\em PeerJ PrePrints}, 3:e1214, 2015.
+
+\bibitem{kohavi2007practical}
+Ron Kohavi, Randal~M Henne, and Dan Sommerfield.
+\newblock Practical guide to controlled experiments on the web: listen to your
+  customers not to the hippo.
+\newblock In {\em Proceedings of the 13th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 959--967. ACM, 2007.
+
+\bibitem{leitner2012application}
+Philipp Leitner, Christian Inzinger, Waldemar Hummer, Benjamin Satzger, and
+  Schahram Dustdar.
+\newblock Application-level performance monitoring of cloud services based on
+  the complex event processing paradigm.
+\newblock In {\em Service-Oriented Computing and Applications (SOCA), 2012 5th
+  IEEE International Conference on}, pages 1--8. IEEE, 2012.
+
+\end{thebibliography}

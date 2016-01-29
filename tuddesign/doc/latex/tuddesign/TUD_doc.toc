@@ -17,23 +17,23 @@
 \contentsline {paragraph}{Hinweis zum Paket \textaccent {hyperref}}{7}{paragraph*.13}
 \contentsline {chapter}{\numberline {2}Die Dokumentenklasse \textaccent {tudreport}}{8}{chapter.2}
 \contentsline {section}{\numberline {2.1}Optionen der Dokumentenklasse \textaccent {tudreport}}{8}{section.2.1}
-\contentsline {paragraph}{Hinweis zum Farbschema}{9}{paragraph*.14}
-\contentsline {paragraph}{Hinweis zu den Seitenstilen}{9}{paragraph*.15}
+\contentsline {paragraph}{Hinweis zum Farbschema}{8}{paragraph*.14}
+\contentsline {paragraph}{Hinweis zu den Seitenstilen}{8}{paragraph*.15}
 \contentsline {paragraph}{Typographische Anmerkungen}{9}{paragraph*.16}
-\contentsline {section}{\numberline {2.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{10}{section.2.2}
-\contentsline {chapter}{\numberline {3}Die Dokumentenklasse \textaccent {tudexercise}}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}Optionen der Dokumentenklasse \textaccent {tudexercise}}{13}{section.3.1}
-\contentsline {section}{\numberline {3.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{13}{section.3.2}
-\contentsline {chapter}{\numberline {4}Die Dokumentenklasse \textaccent {tudposter}}{14}{chapter.4}
-\contentsline {section}{\numberline {4.1}Optionen der Dokumentenklasse \textaccent {tudposter}}{14}{section.4.1}
-\contentsline {section}{\numberline {4.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{14}{section.4.2}
-\contentsline {paragraph}{Typographische Anmerkungen}{14}{paragraph*.17}
-\contentsline {chapter}{\numberline {5}Die Briefklasse \textaccent {tudletter}}{15}{chapter.5}
-\contentsline {section}{\numberline {5.1}Optionen der Klasse \textaccent {tudletter}}{15}{section.5.1}
-\contentsline {section}{\numberline {5.2}Die Variablen}{15}{section.5.2}
-\contentsline {section}{\numberline {5.3}Anmerkung zur Seitennummerierung}{15}{section.5.3}
-\contentsline {section}{\numberline {5.4}Die Konfigurations-Dateien}{15}{section.5.4}
-\contentsline {chapter}{\numberline {6}Die Pr\active@dq \dq@prtct {a}sentationsklasse \textaccent {tudbeamer}}{17}{chapter.6}
-\contentsline {section}{\numberline {6.1}Optionen der Klasse \textaccent {tudbeamer}}{17}{section.6.1}
-\contentsline {section}{\numberline {6.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{17}{section.6.2}
-\contentsline {section}{\numberline {6.3}Bekannte Fehler}{18}{section.6.3}
+\contentsline {section}{\numberline {2.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{9}{section.2.2}
+\contentsline {chapter}{\numberline {3}Die Dokumentenklasse \textaccent {tudexercise}}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Optionen der Dokumentenklasse \textaccent {tudexercise}}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{11}{section.3.2}
+\contentsline {chapter}{\numberline {4}Die Dokumentenklasse \textaccent {tudposter}}{12}{chapter.4}
+\contentsline {section}{\numberline {4.1}Optionen der Dokumentenklasse \textaccent {tudposter}}{12}{section.4.1}
+\contentsline {section}{\numberline {4.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{12}{section.4.2}
+\contentsline {paragraph}{Typographische Anmerkungen}{12}{paragraph*.17}
+\contentsline {chapter}{\numberline {5}Die Briefklasse \textaccent {tudletter}}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}Optionen der Klasse \textaccent {tudletter}}{13}{section.5.1}
+\contentsline {section}{\numberline {5.2}Die Variablen}{13}{section.5.2}
+\contentsline {section}{\numberline {5.3}Anmerkung zur Seitennummerierung}{13}{section.5.3}
+\contentsline {section}{\numberline {5.4}Die Konfigurations-Dateien}{13}{section.5.4}
+\contentsline {chapter}{\numberline {6}Die Pr\active@dq \dq@prtct {a}sentationsklasse \textaccent {tudbeamer}}{14}{chapter.6}
+\contentsline {section}{\numberline {6.1}Optionen der Klasse \textaccent {tudbeamer}}{14}{section.6.1}
+\contentsline {section}{\numberline {6.2}Zus\active@dq \dq@prtct {a}tzliche Befehle}{14}{section.6.2}
+\contentsline {section}{\numberline {6.3}Bekannte Fehler}{14}{section.6.3}
