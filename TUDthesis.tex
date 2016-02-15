@@ -67,7 +67,7 @@
 	
 	Software Engineering Practice in the industry has faced a phenomenal change since the advent of Cloud Computing. This is mainly due to the flexibility and the dynamic scaling up and scaling down of the infrastructure as required by the current workload. This proves not only to be elastic but cost-effective as well. It is quite obvious that this elasticity is achieved by the continuous monitoring of several metrics that indicate the demand at the moment, and provisioning the necessary resources to meet the monitored demand. Distributed, scalable enterprise-wide applications also mandate the monitoring of metrics for reasoning the effectiveness of the applications by engineers and business analysts \cite{leitner2012application}.
 	
-	\par The metrics that are being monitored vary widely. For instance, the metrics such as memory consumption, CPU utilization, Network bandwidth utilization could be considered to be at the Infrastructure level, whereas some other metrics such as Response times of methods/procedures, the number of users accessing the application, maximum number of users who can use the application simultaneously, etc. could be considered to be at the application level. Sometimes, the application level metrics could depend on the primitive metrics at the infrastructure level and vice versa.
+	\par The metrics that are being monitored vary widely. For instance, the metrics such as memory consumption, CPU utilization, Network bandwidth utilization could be considered to be at the Infrastructure level, whereas some other metrics such as Response times of methods/procedures, the number of users accessing the application, maximum number of users who can use the application simultaneously, etc. could be considered to be at the application level. Sometimes, the application level metrics could depend on the primitive metrics at the infrastructure level and vice-versa.
 	
 	\par As Cloud Application Development has becoming more common, the run time monitoring metrics of these applications are available through several Application Performance Monitoring (APM) tools such as Amazon Cloudwatch, New Relic, etc. But, they do not provide any valuable and visible feedback to the developers, and hence most of the cloud developers do not use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that is taking a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment. This type of analytic and predictive feedback should be provided to the developers in their IDEs which otherwise may not be explored by the developers. This technique of utilizing the monitoring data is known Feedback driven development. Feedback Driven Development that provides visual tools to the cloud developers is the focus of this thesis research.	
 	
@@ -89,7 +89,7 @@ The Cloud computing paradigms are classified into three service models which for
 %% add the stack image 	
 %\end{itemize}
 	
-From the software engineering perspective, it is important to note how Cloud Computing impacts the development practices. Based on the research conducted, there are two important research issues \cite{cito2014making}. 
+\cite{bruneo2015framework} defines a framework that collects data as defined by a 3-D cloud monitoring model. From the software engineering perspective, it is important to note how Cloud Computing impacts the development practices. Based on the research conducted, there are two important research issues \cite{cito2014making}. 
 
 \begin{itemize}
 
@@ -153,13 +153,20 @@ Predictive FDD is one step ahead compared to the Analytic FDD. It utilizes the r
  		
 	\subsection{Logging}
 		
+		As depicted in \cite{jiang2009understanding} , it is clear that Auto Generated issues are resolved much faster than human generated issues. Auto generated issues are those that have attached symptoms and system logs as event messages, whereas Human generated issues are those reported by the users usually through email tickets/phone calls. This further justifies the use and necessity of logging. \cite{jiang2009understanding} also lists down the challenges of using the logging information.
+		
 		The Log Data collected to generate the feedback is discussed here. Among the two types of data: Monitoring Data and Production data as detailed in \cite{cito2015runtime} we focus on the Monitoring data. This category of data is further classified as Load Data (incoming requests, server utilization, number of instances), Performance data (Response times, hotspots), cost data and User Behavior Data (Click Streams). This data is mostly collected by existing APM Tools.
+		
+		\cite{yuan2012conservative} answers the question of where to add logs proactively that could help minimize the effort of failure diagnosis. ERRLOG, a tool that identifies in which location log needs to be added is developed. Errlog makes use of code analysis techniques to achieve this. iTrack, a framework for monitoring user activities and correlating them with system data is done to detect service outages as in \cite{mann2011correlating}. 
 			
 	\subsubsection{Logging Tools and Metrics}	
-		
+
 		\subsubsection{Log Structure}	
 		
 		\subsubsection{Performance related Logging}
+		\cite{nagaraj2012structured} explains a tool known as DISTALYZER that analyses the system logs to identify the performance issues. This tool analyses logs from large scale distributed systems and compares a set of baseline logs with an acceptable performance with another set of logs with unacceptable performance. DISTALYZER uses machine learning techniques which first creates a set of features(event/state variables) for the logs. Further Predictive and Descriptive Modeling are performed on these variables to provide the developers the root cause of the issue.
+		
+		
 		
 		\subsubsection{Click Stream Logging}
 	
