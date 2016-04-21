@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <SCRIPT LANGUAGE="JavaScript">
+        
+        
+        
+     
+
+    </SCRIPT>
+</head>
+
+<body onLoad="Reset()">
+
+    <CENTER>
+        <FORM ENCTYPE="text/plain" NAME="mail" METHOD='GET' ACTION='mailto:youremailaddress' onSubmit="return submitForms()">
+            <TABLE BORDER=0 WIDTH=400>
+                <TR>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your name:</STRONG></FONT>
+                    </TD>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your e-mail address:</STRONG></FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="name" SIZE=30 MAXLENGTH=40>
+                    </TD>
+                    </TD>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="email" SIZE=30 MAXLENGTH=40>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your city: </STRONG></FONT>
+                    </TD>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your country:</STRONG></FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="city" SIZE=30 MAXLENGTH=60>
+                    </TD>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="country" SIZE=30 MAXLENGTH=60>
+                    </TD>
+                </TR>
+            </TABLE>
+            <CENTER>
+                <FONT COLOR=800000><STRONG>Leave a comment or suggestion:</strong> </font>
+                <BR>
+                <TEXTAREA NAME="comments" ROWS=5 COLS=50 wrap=yes>Comments? Suggestions?</TEXTAREA>
+                <P>
+                    <P>
+                        <FONT COLOR=800000><STRONG>List your favorite sites:</STRONG></FONT>
+                        <BR>
+                        <TD align="center">
+                            <TEXTAREA NAME="favorites" ROWS=5 COLS=50 wrap=yes>
+                                Any sites I should take a look at?</TEXTAREA>
+                            <P>
+                                <P>
+                                    <INPUT TYPE="submit" VALUE="Submit">
+                                    <center>
+                                        <INPUT TYPE="reset" VALUE="Reset" onClick="Reset()">
+        </FORM>
+        </CENTER>
+
+
+
+</body>
+
+</html>

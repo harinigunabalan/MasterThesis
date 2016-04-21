@@ -1,0 +1,141 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type = "text/javascript"> 
+
+/*     $.ajax({
+         // url : "https://availability.cfapps.sap.hana.ondemand.com/api/v1/evaluations/12918/cache",
+          url: "https://google.com",
+          
+        // method: "GET",
+
+			// dataType : "json",
+            headers: {
+               "Authorization": "Basic " + btoa("username" + ":" + "username")
+             }, 
+              // username: "D063995",
+              // password: "Mythili24",
+             //  crossDomain : true,  
+           		// xhrFields : {  
+                //	 withCredentials : true  
+             	//  },
+               // contentType : "application/json", 
+               success : function(data) {
+            	   	console.log("success - new!!");
+               		console.log(data);
+            },
+               error :  function() {
+                              //console.log("error "+data);
+               } 
+   }); */
+
+// Create the XHR object.
+   function createCORSRequest(method, url) {
+     var xhr = new XMLHttpRequest();
+     if ("withCredentials" in xhr) {
+       // XHR for Chrome/Firefox/Opera/Safari.
+       xhr.open(method, url, true);
+     } else if (typeof XDomainRequest != "undefined") {
+       // XDomainRequest for IE.
+       xhr = new XDomainRequest();
+       xhr.open(method, url);
+     } else {
+       // CORS not supported.
+       xhr = null;
+     }
+     return xhr;
+   }
+
+   // Helper method to parse the title tag from the response.
+   function getTitle(text) {
+     return text.match('<title>(.*)?</title>')[1];
+   }
+
+   // Make the actual CORS request.
+   function makeCorsRequest() {
+     // All HTML5 Rocks properties support CORS.
+     var url = 'http://updates.html5rocks.com';
+
+     var xhr = createCORSRequest('GET', url);
+     //xhr.setRequestHeader(
+    	//	    'Access-Control-Allow-Origin:', ' http://localhost:8080');
+     if (!xhr) {
+       alert('CORS not supported');
+       return;
+     }
+
+     xhr.send();
+    console.log("XHR Sent");
+     // Response handlers.
+     xhr.onload = function() {
+       var text = xhr.responseText;
+       var title = getTitle(text);
+       alert('Response from CORS request to ' + url + ': ' + title);
+     };
+
+     xhr.onerror = function() {
+       alert('Woops, there was an error making the request.');
+       console.log(xhr.status);
+     };
+     
+   }
+   
+   makeCorsRequest();
+    
+</script>  
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">	
+    
+  
+        
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(initializeDataTable);
+    var data;  
+    
+    function initializeDataTable(){
+            data = new google.visualization.DataTable();
+            data.addColumn('number', 'Timestamp');
+            data.addColumn('number', 'Response Time in Millis');
+            data.addColumn('number', 'Response Status Code');
+        $.ajax({
+        url: "check15717.json",
+        success: function (response) {
+            console.log("success");        
+            // var obj = JSON.parse(response);
+            // console.log(obj);
+            var results = response.results;
+            console.log(results);
+            for(var i = 0; i < results.length; i++){
+                data.addRow([results[i].measurement.time, results[i].measurement.response_time_millis, results[i].measurement.response_status_code]);    
+            }
+            drawChart();
+        }
+        });
+    }    
+     
+        function drawChart() {
+             
+     var options = {
+          title: 'Availability',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        
+          console.log("before drawing");
+          console.log(data);
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+  	<button type="button">Refresh</button>  	
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>  
+  </body>
+</html>

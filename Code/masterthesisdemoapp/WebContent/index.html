@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <SCRIPT LANGUAGE="JavaScript">
+        var emailAddress = "youremailaddress";
+
+        function toName() {
+            var toNameval = document.forms[0].elements[1].value;
+            toNameval = "mailto:youre-mailaddress.com?subject=Guest Book example";
+            this.document.mail.action = toNameval;
+        }
+
+        function Reset() {
+            document.forms[0].elements[0].value = "";
+            document.forms[0].elements[1].value = "";
+            document.forms[0].elements[2].value = "";
+            document.forms[0].elements[3].value = "";
+            document.forms[0].elements[4].value = "";
+            document.forms[0].elements[5].value = "";
+            document.forms[0].elements[0].focus();
+        }
+
+        function submitForms() {
+            if ((isName()) && (isEmail()) && (isCity()) && (isCountry()) && (isComment()) && (isFavorite()))
+                if (confirm("\nYou're about to e-mail the form.\n\nClick on YES to submit.\n\nClick on NO to abort.")) {
+                    alert("\nYour submission will now be made to :\n\n" + emailAddress + "\n\n\nThank you!");
+                    return true;
+                } else {
+                    alert("\nYou have chosen to abort the submission.");
+                    return false;
+                } else
+                return false;
+        }
+
+        function isName() {
+            var str = document.forms[0].elements[0].value;
+            if (str == "") {
+                alert("\nThe NAME field is blank.\n\nPlease enter your name.")
+                document.forms[0].elements[0].focus();
+                return false;
+            }
+            for (var i = 0; i < str.length; i++) {
+                var ch = str.substring(i, i + 1);
+                if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' ') {
+                    alert("\nThe NAME field only accepts letters & spaces.\n\nPlease re-enter your name.");
+                    document.forms[0].elements[0].select();
+                    document.forms[0].elements[0].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function isEmail() {
+            emailAddress = document.forms[0].elements[1].value;
+            if (document.forms[0].elements[1].value == "") {
+                alert("\nThe E-MAIL field is blank.\n\nPlease enter your e-mail address.")
+                document.forms[0].elements[1].focus();
+                return false;
+            }
+            if (document.forms[0].elements[1].value.indexOf('@', 0) == -1 ||
+                document.forms[0].elements[1].value.indexOf('.', 0) == -1) {
+                alert("\nThe E-MAIL field requires a \"@\" and a \".\"be used.\n\nPlease re-enter your e-mail address.")
+                document.forms[0].elements[1].select();
+                document.forms[0].elements[1].focus();
+                return false;
+            } else {
+                //toName();
+                return true;
+            }
+        }
+
+        function isCity() {
+            var str = document.forms[0].elements[2].value;
+            if (str == "") {
+                alert("\nThe CITY field is blank.\n\nPlease enter your city.")
+                document.forms[0].elements[3].focus();
+                return false;
+            }
+            for (var i = 0; i < str.length; i++) {
+                var ch = str.substring(i, i + 1);
+                if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' ') {
+                    alert("\nThe CITY field only accepts letters & spaces.\n\nPlease re-enter your city.");
+                    document.forms[0].elements[3].select();
+                    document.forms[0].elements[3].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function isCountry() {
+            var str = document.forms[0].elements[3].value;
+            if (str == "") {
+                alert("\nThe COUNTRY field is blank.\n\nPlease enter your country.")
+                document.forms[0].elements[3].focus();
+                return false;
+            }
+            for (var i = 0; i < str.length; i++) {
+                var ch = str.substring(i, i + 1);
+                if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' ') {
+                    alert("\nThe COUNTRY field only accepts letters & spaces.\n\nPlease re-enter your country.");
+                    document.forms[0].elements[3].select();
+                    document.forms[0].elements[3].focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function isComment() {
+            if (document.forms[0].elements[4].value == "") {
+                if (confirm("\nYou're about to submit without leaving a comment.\n\nClick on CANCEL to include a comment.\n\nClick on OK to continue without a comment."))
+                    return true
+                else {
+                    document.forms[0].elements[4].focus();
+                    return false;
+                }
+            } else
+                return true
+        }
+
+        function isFavorite() {
+            if (document.forms[0].elements[5].value == "") {
+                if (confirm("\nYou're about to submit without listing your favorite sites.\n\nClick on CANCEL to include favorites.\n\nClick on OK to continue without listing favorites."))
+                    return true
+                else {
+                    document.forms[0].elements[5].focus();
+                    return false;
+                }
+            } else
+                return true
+        }
+
+    </SCRIPT>
+</head>
+
+<body onLoad="Reset()">
+
+    <CENTER>
+        <FORM 	ENCTYPE="text/plain" 
+        		NAME="mail" METHOD='post' 
+        		ACTION="/processrequest"
+        		onSubmit="return submitForms()">
+        		
+            <TABLE BORDER=0 WIDTH=400>
+                <TR>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your name:</STRONG></FONT>
+                    </TD>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your e-mail address:</STRONG></FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="name" SIZE=30 MAXLENGTH=40>
+                    </TD>
+                    </TD>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="email" SIZE=30 MAXLENGTH=40>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your city: </STRONG></FONT>
+                    </TD>
+                    <TD align="center">
+                        <FONT COLOR=800000><STRONG>Enter your country:</STRONG></FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="city" SIZE=30 MAXLENGTH=60>
+                    </TD>
+                    <TD align="center">
+                        <INPUT TYPE="text" NAME="country" SIZE=30 MAXLENGTH=60>
+                    </TD>
+                </TR>
+            </TABLE>
+            <CENTER>
+                <FONT COLOR=800000><STRONG>Leave a comment or suggestion:</strong> </font>
+                <BR>
+                <TEXTAREA NAME="comments" ROWS=5 COLS=50 wrap=yes>Comments? Suggestions?</TEXTAREA>
+                <P>
+                    <P>
+                        <FONT COLOR=800000><STRONG>List your favorite sites:</STRONG></FONT>
+                        <BR>
+                        <TD align="center">
+                            <TEXTAREA NAME="favorites" ROWS=5 COLS=50 wrap=yes>
+                                Any sites I should take a look at?</TEXTAREA>
+                            <P>
+                                <P>
+                                    <INPUT TYPE="submit" VALUE="Submit">
+                                    <center>
+                                        <INPUT TYPE="reset" VALUE="Reset" onClick="Reset()">
+        </FORM>
+        </CENTER>
+
+
+
+</body>
+
+</html>

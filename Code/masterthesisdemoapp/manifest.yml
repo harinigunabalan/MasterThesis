@@ -1,0 +1,7 @@
+
+---
+applications:
+- name: masterthesisdemo_d063995
+  memory: 256M
+  instances: 1
+  path: masterthesisdemoapp.war
