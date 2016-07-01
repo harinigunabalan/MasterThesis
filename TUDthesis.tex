@@ -1,11 +1,13 @@
-\documentclass[article,type=msc,colorback,12pt,accentcolor=tud7b]{tudthesis}
+\documentclass[article,type=msc,colorback,12pt,accentcolor=tud7b,table]{tudthesis}
+%\usepackage[table,xcdraw]{xcolor}
 \usepackage{ngerman}
 \usepackage[english]{babel}
 \usepackage{cite}
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{listings}
-\graphicspath{ {images/A/} {images/B/} {images/C/} {images/D/}}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\graphicspath{ {images/A/} {images/B/} {images/C/} {images/D/}{images/E/}}
 
 \hypersetup{
     colorlinks,
@@ -38,19 +40,34 @@
   \tuprints{12345}{1234}
   \makethesistitle
   \affidavit{Harini Gunabalan}
+\cleardoublepage
+
+\section*{\begin{center}
+		{\huge Acknowledgment}
+	\end{center}}
+	\vspace*{\fill}
+	\begin{center}
+		\par \textit{"Thanks to Guido, Gerald, Aryan, Juergen, Anne, Prof. Mezini, Hari and friends for playing a major role in supporting my Master Thesis work."}\\
+		\begin{flushright}
+			\textit{	-Harini}
+		\end{flushright}
+	\end{center}
+	\vspace*{\fill}
+	\clearpage
 
 
 \begin{abstract}
 \begin{large} 
 	
-\par Over the last few years, the Cloud Computing Paradigm has gained a lot of importance in both the Academia and the Industry. The cloud has not only changed the IT Landscape from the user's perspective but has also changed how the Developers develop applications on the cloud. The increasing adoption of the DevOps approach has led to the removal of the boundaries between the development and the operations. 
+	Over the last few years, the Cloud Computing Paradigm has gained a lot of importance in both the Academia and the Industry. The cloud has not only changed the IT Landscape from the user's perspective but has also changed how the Developers develop applications on the cloud and how the Operators have to automate provisioning Infrastructure. The increasing adoption of the DevOps approach has led to the removal of the boundaries between the development and the operations. 
+	\leavevmode
+	\newline
 
+	Among the the three levels of the Cloud Computing: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service(PaaS) and Software-as-a-Service(SaaS), Software Developers are mainly concerned with the PaaS which allows them to focus on the Application Development. Leveraging the fact that the Application is hosted on the cloud, there are additional metrics regarding the application available to Developers in different Log formats. There are also Cloud Monitoring Tools which consolidates these logs with a huge volume of data representing the run-time metrics etc. of the cloud applications. Though monitoring of the cloud applications has been done by many tools, most of the DevOps do not go through the cumbersome error/warning log data. Utilizing this information, it is possible to have an overview of the Application Performance at real time. This aids in capturing issues that occur at scale which normally could not be captured by Profilers. This could also help us to reduce the developer-operator gap providing an improved DevOps experience. 
+	\leavevmode
+	\newline
 
-
-\par Among the the three levels of the Cloud Computing: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service(PaaS) and Software-as-a-Service(SaaS), Software Developers are mainly concerned with the PaaS which allows them to focus on the Application Development. Leveraging the fact that the Application is hosted on the cloud, there are additional metrics regarding the application available to Developers in different Log formats. There are also Cloud Monitoring Tools which consolidates these logs with a huge volume of data representing the run-time metrics etc. of the cloud applications. Though monitoring of the cloud applications has been done by many tools, most of the developers do not go through the cumbersome error/warning log data.These log data are not visually made available to the developers in their Development Environment. By providing this information, developers can have an overview of the Application Performance at real time, and can capture issues that occur at scale which normally could not be captured by Profilers. This could also help us to reduce the developer-operator gap providing an improved DevOps experience. 
-
-\par This Thesis work aims in addressing this issue. The focus is mainly to map the run-time metrics to the source code artifacts, thereby helping the developers link the Run time metrics to the source code. Mapping will involve log data aggregation, code analysis techniques etc.
-
+	This thesis work makes use of the monitoring data to implement a platform level AutoScaler. Developers can continue to deploy new features and operators do not have to manually intervene into deploying more application instances as the application scales.
 	
 \end{large}
 \end{abstract}  
@@ -62,8 +79,9 @@
 \index{key}
 \tableofcontents 
 \cleardoublepage 
-
 \listoffigures
+\cleardoublepage 
+\listoftables
 \clearpage
 \appendix
 \cleardoublepage 
@@ -84,7 +102,7 @@
 	
 	\subsection{Problem Statement}	
 	
-The Cloud computing paradigms are classified into three service models which forms a stack as shown in Figure 1. 
+The Cloud computing paradigms are classified into three service models which forms a stack as shown in Figure 1. The three layers work coordinate with each other.
 
  \begin{figure}
  \begin{center}
@@ -116,10 +134,10 @@ The Cloud computing paradigms are classified into three service models which for
 	
 \end{itemize}
 
-Considering these issues, it is certainly important how we are going to leverage these Cloud monitoring Logs to make a useful impact for the Cloud Developers. 
+Considering these issues, it is certainly important how we are going to leverage these Cloud monitoring Logs to make a useful impact for the Cloud Developers and Cloud Operators. 
  
  	\subsubsection{Continuous Delivery in Cloud Development}
- 	As we compare the software development on-premise with that of the Cloud, there has been a huge change in every software release. Deployment cycles has been reduced from months to days and sometimes even within a few hours the next version is released. This process is often referred to Continuous Delivery(CD) in the Cloud Computing terms. Most companies make use of this Continous Delivery to rollout new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. CD has become a huge success and companies such as Google,Facebook etc. adopt CD of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months when the traditional software development life-cycle is used. The feature needs to be delayed until the next release. Whereas in this CD approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called "perpetual development" where the code is always under continuous development and there is no stable release version for a particular product.  	\par Owing to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the User Interface of application, error and warning logs, infrastructure related data etc. are produced. There are a lot of existing APM Tools that collect this data and generate information out of it, however, how this information could be made effective to the software developers in their daily routine is a topic that is not discussed very often. 
+ 	As we compare the software development on-premise with that of the Cloud, there has been a huge change in every software release. Deployment cycles has been reduced from months to days and sometimes even within a few hours the next version is released. This process is often referred to Continuous Delivery(CD) in the Cloud Computing terms. Most companies make use of this Continous Delivery to rollout new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. CD has become a huge success and companies such as Google,Facebook etc. adopt CD of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months when the traditional software development life-cycle is used. The feature needs to be delayed until the next release. Whereas in this CD approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called "perpetual development" where the code is always under continuous development and there is no stable release version for a particular product.  	\par Owing to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the User Interface of application, error and warning logs, infrastructure related data etc. are produced. There are a lot of existing APM Tools that collect this data and generate information out of it, however, how this information could be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
  	
  	\subsubsection{Monitoring Metrics: Scalability and Availability of the Application}
  	
@@ -129,12 +147,9 @@ Considering these issues, it is certainly important how we are going to leverage
 	
 	\par Availability is one of the major goals of Cloud Computing. It means that the Cloud Services need to be available and accessible at anytime from anywhere. For business to happen continuously, it is necessary for the services to be highly available. The definition of availability is specified by the different Cloud vendors in their SLAs. For example, Google Search is known for its high availability.	
 	
-	\subsubsection{Incorporating the collected Feedback in the Development Environment}	
+	\subsubsection{Incorporating the collected Feedback for Operations}	
 	
-	Using the collected metrics, in this thesis, we aim to provide an efficient feedback to the Cloud Developers. The collected feedback is integrated into the Development Environment (IDEs) so that developers are able to utilize the feedback to make their applications better scalable and highly available.	
-	
-	
-	\subsection{Proposed Approach}
+	Using the collected metrics, in this thesis, we aim to provide an efficient feedback to the Cloud Operators. In \cite{cito2015runtime}, the collected feedback is integrated into the Development Environment (IDEs) so that developers are able to utilize the feedback to make their applications better scalable and highly available. This feedback can also be leveraged to automate configuration management to facilitate dynamic Infrastructure Provisioning.
 	
 	\subsection{Dissertion Roadmap}
 
@@ -178,7 +193,7 @@ Considering these issues, it is certainly important how we are going to leverage
   \label{tab:Table1}
   \begin{tabular}{l|l}
   \hline
-  \textbf{Cloud Monitoring Platforms}  & \textbf{Cloud Monitoring Services} \\
+  \rowcolor[HTML]{FFCB2F}  \textbf{Cloud Monitoring Platforms}  & \textbf{Cloud Monitoring Services} \\
     \hline
     CloudWatch \cite{cloudwatchdev} \cite{cloudwatch} & New Relic \cite{newrelic} \\    
     Nimsoft \cite{nimsoft} & Cloudyn \cite{cloudyn} \\        
@@ -358,33 +373,31 @@ LITO is a cost model to determine if a code commit has caused performance regres
 \end{itemize}
 \end{enumerate}	
 	
-	\subsection{Conclusion}
-	
  \cleardoublepage
  \section{Design and Architecture}	
  
 	In this chapter, the high level architectural design of the thesis work is explained. We look into the design decisions such as the choice of cloud monitoring metrics to be collected, and the need for an auto-scaler at the application level. The first section shows the architectural overview of the System followed by the details in the second section. The third section explains the Design of Auto-scaler. The next two section focuses on the Data Modeling and Evaluation of the Model. The final section provides a System Footprint of the Thesis Implementation.
  
-\subsection{System Architecture Overview} 
+\subsection{System Flow - An overview} 
 
-	The architectural overview of the system is depicted in Figure 8. A sample demo application is considered. This app is deployed to the Cloud and monitored continuously. the monitoring metrics of the application is collected. This data is used for modeling the Metrics. Based on the monitoring service, an auto-scaler is designed. The Auto-Scaler aids the applications hosted in the Cloud to seamlessly scale-out and scale-in depending on several parameters. 
+	The overall flow of the system is depicted in Figure 8. A sample demo application is considered. This app is deployed to the Cloud and monitored continuously. the monitoring metrics of the application is collected. This data is used for modeling the Metrics. Based on the monitoring service, an auto-scaler is designed. The Auto-Scaler aids the applications hosted in the Cloud to seamlessly scale-out and scale-in depending on several parameters. 
 	
 		 \begin{figure}[!h]
 		 	\begin{center}
 		 		\makebox[\textwidth]{\includegraphics[scale = 0.6]{C1}}
 		 	\end{center}
-		 	\caption{System Architecture: Overview}
+		 	\caption{System Flow}
 		 \end{figure}
 		 
 	
 	The Cloud Application Monitoring has paved way for several adaptations both in terms of Application (Source Code changes) and the Infrastructure. As mentioned about Feedback Driven Development in Chapter 2, Application level adaptation focuses on root cause identification and source code changes. In this design, we look into possibility of efficiently utilizing the monitoring metrics to perform Infrastructure adaptation.  This design focuses in deriving suitable enactment points where necessary scaling decisions are taken. The several metrics which are monitored include the Number of requests that the Cloud application receives, the average response time of these requests, the CPU \% utilization, the memory \% utilization, the Disk \% utilization etc. Once the application is hosted in the Cloud, the monitoring service is started. This is also useful for the cloud providers to meter the usage of application so that Customers are charged accordingly.
  
- \subsection{System Architecture Details}
+ \subsection{System Architecture }
  	The overall system design is split into three parts as shown in the Figure 9. The first part explains the Cloud Monitoring Data Collection, the second part details the Auto-scaler and the final part focuses on Data Modeling. 			
  	
  			 \begin{figure}
  			 	\begin{center}
- 			 		\makebox[\textwidth]{\includegraphics[scale=0.6]{C2}}
+ 			 		\makebox[\textwidth]{\includegraphics[scale=0.79]{C2}}
  			 	\end{center}
  			 	\caption{System Architecture: Details}
  			 \end{figure}
@@ -413,7 +426,7 @@ LITO is a cost model to determine if a code commit has caused performance regres
  	 	\begin{center}
  	 		\makebox[\textwidth]{\includegraphics[scale = 0.5]{C3}}
  	 	\end{center}
- 	 	\caption{System Architecture: Overview}
+ 	 	\caption{Scaling at two different levels: Platform versus Infrastructure}
  	 \end{figure}
  	
  	Infrastructure scaling involves adding or removing Virtual Machines or server nodes whereas platform scaling involves adding or removing additional instances of the application itself. It is certainly important to have both Infrastructure and application scaling when we consider a PaaS. For Enterprise IT Services, it becomes quite important to evaluate if the application also scales seamlessly. It may not be sufficient if the infrastructure scales while the application does not \cite{app_infra_scale}. 
@@ -452,7 +465,7 @@ LITO is a cost model to determine if a code commit has caused performance regres
  	
  	The first phase of Data Modeling is known as the Estimation phase or the Learning Phase. During this phase the training data set is available. The inputs and outputs of the training data set is used. The system learns the correlation between inputs and outputs. When more data points are available, better learning is achieved. A modeling tools estimates the best fit of the data points to a model. The estimation data may not always fit into a linear regression model. Sometimes, non-linear models may need to be considered. But for simplicity we perform the data estimation with State space and Polynomial models.
  	
- 	State space model estimation is quite simple. The user needs to provide just one parameter: The model order. Choosing the optimal model order is important. The model order determines the size of the State Variable vector, $x_i$. The model estimation determines the values of the state variables using the estimation data inputs and outputs. Once the state variables are determined, the model can estimate the output at anytime later using the inputs at that time.
+ 	State space model estimation is quite simple. The user needs to provide just one parameter: The model order. Choosing the optimal model order is important. The model order determines the size of the State Variable vector, $x_i$. The model estimation determines the values of the state variables using the estimation data inputs and outputs. Once the state variables are determined, the model can estimate the output at anytime later using the inputs at that time. The flow of Estimation phase is as shown in Figure 13.
  	
  	 	 \begin{figure}[!h]
  	 	 	\begin{center}
@@ -465,7 +478,7 @@ Polynomial model estimation requires to specify the orders of the polynomials. D
 
 \subsubsection{Phase 2: Validation phase}
 
-The estimated model needs to be validated against the Validation Dataset. The accuracy of the model is calculated by comparing the output values estimated by the model with the actual output values of the validation data set. The data modeling process maybe repeated by varying parameters such as model orders etc. to derive a model which is accurate enough. The desired accuracy may vary depending on the application.
+The estimated model needs to be validated against the Validation Dataset. The accuracy of the model is calculated by comparing the output values estimated by the model with the actual output values of the validation data set. The data modeling process maybe repeated by varying parameters such as model orders etc. to derive a model which is accurate enough. The desired accuracy may vary depending on the application. The flow of Validation phase is as shown in Figure 14.
 
   \begin{figure}[!h]
   	\begin{center}
@@ -479,8 +492,24 @@ The estimated model needs to be validated against the Validation Dataset. The ac
 	
 	The Loggregator component of Cloud Foundry is responsible for logging. Loggregator collects all the logs from both the application and the Cloud Foundry system components which interact with the application during execution. These Cloud Foundry Logs and API's are used to collect and aggregate the metrics. 
 	
-	The Monitoring and Scaling services are developed as a Java application. The monitoring data collected are persisted in the MySQL database. This data is modeled by using MATLAB's System Identification Toolbox.
+	The Monitoring and Scaling services are developed as a Java application. The monitoring data collected are persisted in the MySQL database. This data is modeled by using MATLAB's System Identification Toolbox. Table 2 summarizes the Implementation System Footprint.
 
+\begin{table}[]
+	\centering
+	\caption{System Footprint}
+	\label{my-label}
+	\begin{tabular}{|l|l|}
+		\hline
+		\rowcolor[HTML]{FFCB2F} 
+		\textbf{System Property}  & \textbf{Details}                     \\ \hline
+		Cloud Platform            & Hana Cloud Platform - Cloud Foundry  \\ \hline
+		Cloud Infrastructure      & OpenStack                            \\ \hline
+		Database                  & MySQL                                \\ \hline
+		Data Modeling Tool        & MATLAB System Identification Toolbox \\ \hline
+		Autoscaler Implementation & Java                                 \\ \hline
+		Sample Cloud App          & HTML and Java                        \\ \hline
+	\end{tabular}
+\end{table}
 
  \cleardoublepage
  \section{System Implementation}
@@ -511,7 +540,7 @@ The cf push command reads the manifest.yml file of the application to be deploye
 The deployed cloud app is monitored continuously to collect the various dimensions of data. Figure 16 shows an application deployed on cloud being monitored. The app is monitored for the usage data and the platform metrics. This thesis work aims to collect and correlate the following metrics:
 
 \begin{enumerate}
-	\item{Average Response Time of the Requests:} \newline The monitoring service collects all the HTTP requests to the application URL during every 10 second interval.  This is collected from Cloud Foundry Logs. The logs contain the response time information of each of the HTTP request. We aggregate the response time obtained in that 10 second interval and calculate the average response time. The following lines show the structure of the router response log from which the response time needs to be extracted and aggregated.
+	\item\textbf{{Average Response Time of the Requests:} }\newline The monitoring service collects all the HTTP requests to the application URL during every 10 second interval.  This is collected from Cloud Foundry Logs. The logs contain the response time information of each of the HTTP request. We aggregate the response time obtained in that 10 second interval and calculate the average response time. The following lines show the structure of the router response log from which the response time needs to be extracted and aggregated.
 	
 	$016-04-18T15:13:12.32+0200 [RTR/0]      OUT \\ masterthesisdemo-d063995.cfapps.sap.hana.ondemand.com\\
 	- [18/04/2016:13:13:12 +0000] "POST /processrequest HTTP/1.1" \\
@@ -522,18 +551,18 @@ The deployed cloud app is monitored continuously to collect the various dimensio
 	\mathbf{response\_time:0.031885594}  \\
 	app\_id:55b4a61c-ee3b-484c-86c9-e656e99b2a96$
 	
-	\item{Throughput(Requests per Second): } \newline From the Cloud Foundry logs, we also count the total number of requests. This keeps varying depending on the User load at that time. 
+	\item\textbf{{Throughput(Requests per Second): }} \newline From the Cloud Foundry logs, we also count the total number of requests. This keeps varying depending on the User load at that time. 
 	
-	\item{No of Instances the application is running on:} \newline The  number of instances that are running for the application are retrieved using the Cloud Foundry API. \cite{cf_stats} The source code to fetch this metric is shown in the below snippet:
+	\item\textbf{{No of Instances the application is running on:}} \newline The  number of instances that are running for the application are retrieved using the Cloud Foundry API. \cite{cf_stats} The source code to fetch this metric is shown in the below snippet:
 	
 \begin{lstlisting}
 String url = "https://<cloud-foundry-target-api-url>
-											/v2/apps/:guid/stats"; 
+	 /v2/apps/:guid/stats"; 
 URL obj = new URL(url);
-
 Proxy proxy = new Proxy(Proxy.Type.HTTP, 
-				new InetSocketAddress("proxy", 8080));
-HttpURLConnection con = (HttpURLConnection) obj.openConnection(proxy);
+			new InetSocketAddress("proxy", 8080));
+HttpURLConnection con = (HttpURLConnection) obj
+			.openConnection(proxy);
 
 con.setRequestMethod("GET");
 con.setRequestProperty("Content-Type", "application/json");
@@ -545,34 +574,54 @@ System.out.println("\nSending 'GET' request to URL : " + url);
 System.out.println("Response Code : " + responseCode);
 
 if(responseCode == 200){
-	BufferedReader in = new BufferedReader(
+ BufferedReader in = new BufferedReader(
 	new InputStreamReader(con.getInputStream()));
-	String inputLine;
-	StringBuffer response = new StringBuffer();
-	
-	while ((inputLine = in.readLine()) != null) {
+ String inputLine;
+ StringBuffer response = new StringBuffer();	
+ while ((inputLine = in.readLine()) != null) {
 		response.append(inputLine);
-	}
-	in.close();
-	
-	String respose_str = response.toString();
-	double avg_cpu_all_instances = ParseCFJsonResponses.parseJsonGetCPUAvg(respose_str);
-	MonitoringService.cpu.add(avg_cpu_all_instances);
+ }
+ in.close();	
+ String respose_str = response.toString();
+ double avg_cpu_all_instances = ParseCFJsonResponses
+	        .parseJsonGetCPUAvg(respose_str);
+ MonitoringService.cpu.add(avg_cpu_all_instances);
 }	
 \end{lstlisting}
 	
 	The authorization token to access the API is fetched by making calling the cf call: $cf oauth-token$. The URL is the CF API end point and the :guid in the URL is the GUID of the application which is retrieved from the Environment variables of the application. The environmnetal variables is accessed by the CF call: $cf env app-name$
 	
-	\item{CPU Utilization, Memory Utilization, and the Disk Utilization as Percentage} 
-	 The CPU, Memory and Disk Utilization are fetched from the CF API the same way as the number of running instances. The URL for this GET request is: 
-	 
-	$String url = "https://<cloud-foundry-target-api-url>/v2/apps/:guid/summary"; $. 
+	\item\textbf{{CPU Utilization, Memory Utilization, and the Disk Utilization as Percentage}} 
+	 The CPU, Memory and Disk Utilization are fetched from the CF API the same way as the number of running instances. The URL for this GET request is:  \newline
+	$ String\ url = "https://<cloud-foundry-target-api-url>/v2/apps/:guid/summary"; $. 
 	
 \end{enumerate}	
 	
 	\subsection{AutoScaler Implementation} 
 	
-	The Autoscaler is implemented as a Java Application. The SLA values and threshold information are stored in a properties file. The autoscaler first fetches this properties file and initializes the values. It consists of the following 2 services: Monitoring Service and the Scaling Service. 
+	The Autoscaler is implemented as a Java Application. The SLA values and threshold information are stored in a properties file. Table 3 lists the constants set in the properties file. 
+	
+	\begin{table}[H]
+		\centering
+		\caption{Properties file of Autoscaler Implementation}
+		\label{my-label}
+		\begin{tabular}{|l|l|}
+			\hline
+			\rowcolor[HTML]{FFCB2F} 
+			Property Name        & Property Value                \\ \hline
+			app\_name            & masterthesisdemo\_d063995     \\ \hline
+			min\_instances       & 1                             \\ \hline
+			max\_instances       & 7                             \\ \hline
+			cool\_down\_interval & 60000                         \\ \hline
+			min\_cpu\_threshold  & 20.0                          \\ \hline
+			max\_cpu\_threshold  & 80.0                          \\ \hline
+			cf\_api              & cloud\_foundry\_api\_endpoint \\ \hline
+			cf\_username         & cloudfoundry\_username           \\ \hline
+			cf\_password         & *********                     \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	The autoscaler first fetches this properties file and initializes the values. It consists of the following 2 services: Monitoring Service and the Scaling Service. 
 	
 \subsubsection{Monitoring Service}
 	
@@ -597,9 +646,9 @@ This serves as the base scema of the dataset that we use for the Data Modeling l
 
 \item{\textbf{CF Login}} The monitoring service logs into Cloud foundry using cf login command.
 \begin{lstlisting}
-public void cfLogin(String api, String username, String password){
-	String[] cf_login = {"cf" , "login" , "-a"  , api , "-u" , 
-			username , "-p" , password};
+public void cfLogin(String api, String uname, String pswd){
+	String[] cf_login = {"cf" , "login" , "-a"  , api , 
+	"-u" , uname , "-p" , pswd};
 	ProcessBuilder pb = new ProcessBuilder(cf_login);
 	Process login = pb.start();
 }
@@ -612,67 +661,78 @@ public void getOAuthToken(){
 \end{lstlisting}
 		
 \item{\textbf{Get CPU/Memory/Disk stats}} 
-The Stats of the application are obtained by sending the GET request. This is shown in section D.1.2.
+The stats of the application are obtained by sending the GET request. This is shown in section D.2.
 		
 \item{\textbf{Stream the CF Logs}} In order to get the response time and throughput, the CF Logs are streamed. The monitoring service creates two threads here: one for writing the logs and another one for reading the logs. The write thread streams the logs and writes it for 10 seconds. Meanwhile, the read logs thread reads the logs written in the previous iteration (previous 10 seconds). The two threads read and write run in parallel and once both are completed the already read file is discarded and the new file written in this iteration is renamed to be read by the Read thread in the next iteration.
 
 \begin{lstlisting}
 public void streamingCFLogs(){
-
 String[] cf_logs = {"cf" , "logs" , Constants.app_name};
 Process log_stream = Runtime.getRuntime().exec(cf_logs);
 
 // Printing output of logs
 // Get input streams
 BufferedReader stdInput = new BufferedReader
-(new InputStreamReader(log_stream.getInputStream()));
+	 (new InputStreamReader(log_stream.getInputStream()));
 //BufferedReader stdError = new BufferedReaded
-(new InputStreamReader(log_stream.getErrorStream()));
+	 (new InputStreamReader(log_stream.getErrorStream()));
 String s; 
-
 if((s = stdInput.readLine()) != null){
-// Writing the CF Logs in a separate thread for 10 seconds
-WriteLogsThread logs_write = new WriteLogsThread(stdInput);
-Thread t1 = new Thread(logs_write);
-t1.start(); 
 
-// Reading the CF Logs of the previous 10 seconds
-ReadLogsThread logs_read = new ReadLogsThread();
-Thread t2 = new Thread(logs_read);
-t2.start();
+ // Writing the CF Logs in a separate thread for 10 seconds
+ WriteLogsThread logs_write = new WriteLogsThread(stdInput);
+ Thread t1 = new Thread(logs_write);
+ t1.start(); 
 
-t1.join();
-t2.join();
+ // Reading the CF Logs of the previous 10 seconds
+ ReadLogsThread logs_read = new ReadLogsThread();
+ Thread t2 = new Thread(logs_read);
+ t2.start();
 
-// Rename Current File to Previous File
-File file1 = new File("/Users/.../cflogsstream_curr.txt");
-File file2 = new File("/Users/.../cflogsstream_prev.txt");
-if (file2.exists())
-throw new java.io.IOException("file exists");
-file1.renameTo(file2);
+ t1.join();
+ t2.join();
+
+ // Rename Current File to Previous File
+ File file1 = new File("/Users/.../cflogsstream_curr.txt");
+ File file2 = new File("/Users/.../cflogsstream_prev.txt");
+
+ // file2 should have been processed and deleted by t2
+ if (file2.exists())		
+	throw new java.io.IOException("file exists");
+ file1.renameTo(file2);
 }          
 \end{lstlisting}
-
-In the read Thread, the logs are parsed to retrieve the response time information. This information is collected in a an ArrayList and aggregated to get the Average Response Time and the Requests per second (Throughput). 
+In the read Thread, the logs are parsed to retrieve the response time information. This information is collected in an ArrayList and aggregated to get the Average Response Time and the Requests per second (Throughput). 
 \begin{lstlisting}
 List<Double> response_times = new ArrayList<Double>();
 while((line = reader.readLine()) != null){				
-if(!(line.equals("")) && line.length() > 32){
-if(line.substring(29, 32).equals("RTR")){
-int index = line.indexOf("response_time");
-if(index == -1) continue;
+	if(!(line.equals("")) && line.length() > 32){
+		if(line.substring(29, 32).equals("RTR")){
+		 int index = line.indexOf("response_time");
+		 if(index == -1) continue;
 
-String temp_string = line.substring(index+14, index+22);
-String temp_number_only = temp_string.replaceAll("[^0-9\\.]+", "");		// Convert string to number only string
-Double rt = Double.parseDouble(temp_number_only);
-response_times.add(rt);	
-}   }  }
+		 String temp_string = line.substring
+					(index+14, index+22);
+		 // Convert string to number only string
+		 String temp_number_only = temp_string.
+				replaceAll("[^0-9\\.]+", "");		
+		 Double rt = Double.parseDouble
+					(temp_number_only);
+		 response_times.add(rt);	
+		}   
+	}  
+}
 
 if(!(response_times.isEmpty())){
-MonitoringService.modelDataObject.setRequestsPerSecond(((double)response_times.size()) / 10.0);
-double rt_avg = (response_times.parallelStream()
-.mapToDouble(e -> e.doubleValue()).average().getAsDouble())*1000;		// In milliseconds
-MonitoringService.modelDataObject.setAvgResponseTime(rt_avg);	 		// Set the Average Response Times  
+	MonitoringService.modelDataObject.
+		setRequestsPerSecond
+			(((double)response_times.size()) / 10.0);
+	// Calculate average Response Time in milliseconds			
+	double rt_avg = (response_times.parallelStream()
+	 .mapToDouble
+	 (e -> e.doubleValue()).average().getAsDouble())*1000;	
+	MonitoringService.modelDataObject.
+		setAvgResponseTime(rt_avg);	 	  
 }
 
 \end{lstlisting}
@@ -694,35 +754,29 @@ The monitoring service persists the data into this database. A JDBC connection t
 
 // JDBC driver name and database URL
 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-static final String DB_URL = "jdbc:mysql://localhost/masterthesis";
-
+static final String DB_URL = "jdbc:mysql://localhost/thesis";
 //  Database credentials
 static final String USER = "root";
 static final String PASS = *******;
-
 Class.forName(JDBC_DRIVER);
 conn = DriverManager.getConnection(DB_URL,USER,PASS);
 stmt = conn.createStatement();
-
- sql = "INSERT INTO modeldata VALUES (" + MonitoringService.modelDataObject.getTimeStamp() + "," + 
- MonitoringService.modelDataObject.getAvgResponseTime() + "," + 
- MonitoringService.modelDataObject.getRequestsPerSecond() + "," + 
- MonitoringService.modelDataObject.getNoInstances()+ "," + 
- MonitoringService.modelDataObject.getMemory_percent() + "," + 
- MonitoringService.modelDataObject.getDisk_percent() + "," +
- MonitoringService.modelDataObject.getCpu_percent() + ")";				
-
+sql = "INSERT INTO modeldata VALUES (" + 
+MonitoringService.modelDataObject.getTimeStamp() + "," + 
+MonitoringService.modelDataObject.getAvgResponseTime() + "," + 
+MonitoringService.modelDataObject.getRequestsPerSecond() + "," + 
+MonitoringService.modelDataObject.getNoInstances()+ "," + 
+MonitoringService.modelDataObject.getMemory_percent() + "," + 
+MonitoringService.modelDataObject.getDisk_percent() + "," +
+MonitoringService.modelDataObject.getCpu_percent() + ")";				
 stmt.executeUpdate(sql);
 stmt.close();	    
 conn.close();	    
-\end{lstlisting}
-		
+\end{lstlisting}		
 \end{itemize}	
-		
 \subsubsection{Scaling Service}
 	
 	Parallel to the Monitoring Service, we also have the Scaling Service. The scaling service is invoked as soon as the monitoring begins. The scaling service has a java.util.Timer and this timer schedules a TimerTask to occur for every Cool Down Period. The scaling decision could be any of the parameters: CPU/Memory/Disk depending on the application and the metrics. In this implementation, we consider a CPU intensive application and hence consider this metric. We could also use a combination of these metrics. The TimerTask thread aggregates the average CPU utilization values in the last cool down period. These steps are shown in the below code snippet:
-	
 \begin{lstlisting}
 static Timer timer_scale = new Timer ();
 static TimerTask autoscaler = new TimerTask(){
@@ -732,53 +786,55 @@ static TimerTask autoscaler = new TimerTask(){
 	 	}
  	};
 public static void invokeAutoScaler(){
-timer_scale.schedule(autoscaler, 60000, Constants.cool_down_interval);
+timer_scale.schedule(autoscaler, 60000, 
+	Constants.cool_down_interval);
 }
 
-double cpu_avg = MonitoringService.cpu.parallelStream().mapToDouble(e -> e.doubleValue()).average().getAsDouble();
+double cpu_avg = MonitoringService.cpu.parallelStream().mapToDouble
+(e -> e.doubleValue()).average().getAsDouble();
 CFCalls cf_call = new CFCalls();
 if(cpu_avg > Constants.max_cpu_threshold){
-	cf_call.cfLogin(Constants.cf_api, Constants.cf_username, Constants.cf_password);
+	cf_call.cfLogin(Constants.cf_api, Constants.cf_username, 
+			Constants.cf_password);
 	cf_call.getOAuthToken();
-	cf_call.cfHorizontalScaling(cf_call.getCurrentRunningInstances()+1, Constants.app_name);
+	cf_call.cfHorizontalScaling(
+			cf_call.getCurrentRunningInstances()+1, 
+			Constants.app_name);
 	cf_call.cfLogout();
 }
 else if (cpu_avg < Constants.min_cpu_threshold){
-	cf_call.cfLogin(Constants.cf_api, Constants.cf_username, Constants.cf_password);
+	cf_call.cfLogin(Constants.cf_api, Constants.cf_username, 
+			Constants.cf_password);
 	cf_call.getOAuthToken();
-	cf_call.cfHorizontalScaling(cf_call.getCurrentRunningInstances()-1, Constants.app_name);
+	cf_call.cfHorizontalScaling(
+			cf_call.getCurrentRunningInstances()-1, 
+			Constants.app_name);
 	cf_call.cfLogout();
 }
 \end{lstlisting}
 	The scaling involves making calls to the $cf scale$ command. The scale command takes the number of instances or memory or disk values as shown below:
 	\begin{lstlisting}
 public void cfHorizontalScaling(int noInstances, String appName){
- if(!(noInstances >= Constants.min_instances && noInstances <= Constants.max_instances)){
+ if(!(noInstances >= Constants.min_instances && 
+		 noInstances <= Constants.max_instances)){
    return;
   }
- String[] cf_scale = {"cf" , "scale", appName, "-i"  , Integer.toString(noInstances) };
+ String[] cf_scale = {"cf" , "scale", appName, "-i"  , 
+		 Integer.toString(noInstances) };
  Process scale = Runtime.getRuntime().exec(cf_scale);
 
 }	
 	\end{lstlisting}
+	  \begin{figure}[h]
+	  	\begin{center}
+	  		\makebox[\textwidth]{\includegraphics[scale=0.75]{D6}}
+	  	\end{center}
+	  	\caption{Importing Data into System Identification Toolbox}
+	  \end{figure}	
 	
 	\subsection{Data Modeling}
  
- The MATLAB System Identification Toolbox is used for Data Modeling. The data from the database is exported to the MATLAB workspace. the input vectors and output vectors are combined. In our system, the input and output is:
- \begin{lstlisting} 
-input = [requestsPerSecond, noInstances, cpu_percent, memory_percent, disk_percent]; \\
-output = [avgResponseTime];
- \end{lstlisting}
- 
- The input and output are now imported to the System Identification Toolbox. This is shown in Figure 18.
- 
-  \begin{figure}[h]
-  	\begin{center}
-  		\makebox[\textwidth]{\includegraphics{D6}}
-  	\end{center}
-  	\caption{Importing Data into System Identification Toolbox}
-  \end{figure}	
-  
+ The MATLAB System Identification Toolbox is used for Data Modeling. The data from the database is exported to the MATLAB workspace. The input vectors and output vectors are combined from the datasets and imported to the System Identification Toolbox. This is shown in Figure 18.  
   The data is now ready to be split into Estimation Data and Validation data. To do this we need to click on the Select Range option underneath preprocess step as shown in Figure 19. 
   
     \begin{figure}[h]
@@ -796,21 +852,22 @@ output = [avgResponseTime];
      	\end{center}
      	\caption{Estimate the model}
      \end{figure}
+
  
  \cleardoublepage
- \section{Evaluation}
+ \section{Evaluating the AutoScaler on Hana Cloud Platform}
  
  The evaluation Chapter consists of the following sections: the first section shows the sample application being monitored, and the second section exemplifies the initial contribution of this thesis: the monitored data and the scaling of the application. The third section evaluates and compares the models suitable for the sample application. The final section provides a summary of the evaluation. 
 
-	\subsubsection{Sample Application under consideration}
-We consider a sample web application: $masterthesisdemo\_d063995$, which is hosted on the Hana Cloud Platform. This is a Guest book application which provides a web interface for the user to enter the data as shown in the figure. 
+	\subsection{Sample Application under consideration}
+We consider a sample web application: $masterthesisdemo\_d063995$, which is hosted on the Hana Cloud Platform. This is a Guest book application which provides a web interface for the user to enter the data as shown in Figure 21. 
  \begin{figure}[h]
  \begin{center}
   \makebox[\textwidth]{\includegraphics{E1}}
 \end{center}
 \caption{User Interface of the Guest book application}
 \end{figure}
-For every user who posts the data, a background calculation of Fibonacci series upto any random number between 0 and 38 is performed. The source code of the recursive Fibonacci series calculation is shown below.
+For every user who posts the data, a background calculation of Fibonacci series upto any random number between 0 and 38 is performed. The source code of the recursive Fibonacci series calculation is shown below. This code runs with an exponential complexity runtime and its time complexity is represented as $O(2^n)$.
  \begin{lstlisting}
 public void ComputeRandomFibonacchi(){		
 	int random_number = (int) (Math.random() * 38);		
@@ -828,53 +885,199 @@ public long fibonacciRecusion(int number){
       return 1;
    }
    return fibonacciRecusion(number-1) 
-   			+ fibonacciRecusion(number -2); //tail recursion
+   		+ fibonacciRecusion(number -2); 
 }
 \end{lstlisting}
-
-The manifest file of this application is shown in Figure. The app is deployed to Cloud Foundry using the following command: $ cf push \: masterthesisdemo\_d063995 $. The cf push command reads the attributes from the manifest.yml file. So, the app is created in the cloud with the name "masterthesisdemo$\_$d063995", and the war file specified in the path is deployed. This application is deployed to 1 instance with a memory of 512 MB.
-
- \begin{figure}[h]
+ \begin{figure}[H]
  \begin{center}
-  \makebox[\textwidth]{\includegraphics[width=\textwidth]{D3}}
+  \makebox[\textwidth]{\includegraphics[width=\textwidth]{E2}}
 \end{center}
 \caption{Manifest.yml file of the Guestbook application}
 \end{figure}
-	
-	\subsubsection{Load Generation on the Sample Application}
+The manifest file of this application is shown in Figure 22. The app is deployed to Cloud Foundry using the following command: $ cf push \: masterthesisdemo\_d063995 $. The cf push command reads the attributes from the manifest.yml file. So, the app is created in the cloud with the name "masterthesisdemo$\_$d063995", and the war file specified in the path is deployed. This application is deployed to 1 instance with a memory of 512 MB.	
+	\subsection{Load Generation on the Sample Application}
 	
  We use Apache Jmeter to generete load on our application. A test plan is created in Jmeter and it is configured to contain 5 thread groups. Each thread group is set to run one after the other (serial execution). The first thread group generates 100 users simultaneously over a ramp up period of 50 seconds. Each of the thread groups are set to loop for a loop counter of 3600. In the following thread groups, the number of threads (users) are increased to 200, 400, 600, 800 and 1000 respectively. The Test Plan configuration is shown in Figure 23. Before we run the Test plan, the Autoscaling service is started. This means the application is being monitored by the Monitoring Service and scaling service is activated. Now we execute the Test plan to see if our application performs monitoring and scaling consistently.
  
   \begin{figure}[h]
   	\begin{center}
-  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{D9}}
+  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E3}}
   	\end{center}
   	\caption{Jmeter Test Plan Configuration}
   \end{figure}
 	
-	\subsubsection{Scaling out and Scaling in of the the application Instances}
+	\subsection{Scaling out and Scaling in of the the application Instances}
 		
-	As and when the load increases, we notice the scaling service creating and adding more instances of the application. This can be verified in the Command Line console. 
+	In this section we see the results of the Scaling Service. As and when the load increases, we notice the scaling service creating and adding more instances of the application. This is because the CPU utilization of the instances go up as our sample application under consideration is a CPU intensive one. This can be verified in the Command Line console as well. Figure 24 shows the command line statistics of the application instances.
 	
-	\subsubsection{Persistence of the Data in MySQL Database}
+	Figure 25 shows the Graph indicating scaling action performed. The graph on top, y1 denotes the Load (Requests per second). The graph beneath, u1 shows the number of application instances. The x axis indicates the time. In this scenario, we collected about 2000 records and the x axis indicates these relative values. From this graph we infer that as the load increases, the number of instances also increases upto 7 and then once the load generation is turned off the number of instances reduces upto 1. In this scenario, 7 is the maximum number of instances, and 1 is the minimum number of instances. This depicts the scaling out and scaling in procedures. 
 	
-	\subsubsection{Modeling the Collected Data}
+	  \begin{figure}[h]
+	  	\begin{center}
+	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E4}}
+	  	\end{center}
+	  	\caption{Stats of the Application instances in the Command Line Interface}
+	  \end{figure}
+	  
+	  	  \begin{figure}[h]
+	  	  	\begin{center}
+	  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E5}}
+	  	  	\end{center}
+	  	  	\caption{Graph depicting the correlation between Load and No. of Application Instances}
+	  	  \end{figure}
 	
-	Graphs of response time with and without Autoscaler.
+	\subsection{Persistence of the Data in MySQL Database}
+	In this section we see the results of the Monitoring Service. The monitoring service continuously collects the information and persists it into the Database.  Figure 26 shows the Data stored in the MySql. The dimensions stored in the table are: Timestamp of the record, Average Response Time, Requests per second, Number of Instances, memory utilization as percentage, disk utilization as percentage, and CPU \% Utilization. The figure also shows the number of instances gradually increasing from 1 until 7 which is the minimum and maximum instances set during our Evaluation.
 	
-	1. Without AS
-	2. With Reactive Autoscaler
-	3. With proactive AutoScaler
+		  	  \begin{figure}[h]
+		  	  	\begin{center}
+		  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E6}}
+		  	  	\end{center}
+		  	  	\caption{MySQL Workbench showing the top rows of the table "modeldata"}
+		  	  \end{figure}
 	
-	\subsubsection{Limitations and Challenges}
-	 
- \cleardoublepage
- \section{Conclusion}	  
-\subsection{Contribution}
-	 
-	For Cloud app issues, cloud monitoring is performed that leads to 2 sides: Development and Operations. This thesis work provides solutions to issues whose root cause may lie on either sides.	 
-	 
-	 \subsection{Future Work}
+	\subsection{Modeling the Collected Data}
+	
+	The dataset from MySql databse is exported into the MATLAB Workspace. We model the system with the input and output as shown:
+\begin{lstlisting} 
+input = [requestsPerSecond, noInstances, cpu_percent, memory_percent, 
+	disk_percent];
+output = [avgResponseTime];
+\end{lstlisting}
+ We estimate the average response time to see the performance improvement of the Application using the AutoScaler. These matrices are now imported to the MATLAB System Identification Toolbox with the name EvalDataSet. The input and output is shown in the below graphs with Time on the X axis as in Figure 27, 28, 29, 30 and 31.
+	
+\begin{figure}[H]
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.6]{E17}}
+	\end{center}
+	\caption{Graph showing the Output Y1:Average Response Time and the Input U1: Requests Per Second}
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.6]{E18}}
+		\end{center}
+	\caption{Graph showing the Output Y1:Average Response Time and the Input U2: Number of Instances}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.6]{E19}}
+	\end{center}
+	\caption{Graph showing the Output Y1:Average Response Time and the Input U3: CPU Utlization Percentage}
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.6]{E20}}
+	\end{center}
+	\caption{Graph showing the Output Y1:Average Response Time and the Input U4: Memory Utlization Percentage}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.6]{E21}}
+	\end{center}
+	\caption{Graph showing the Output Y1:Average Response Time and the Input U5: Disk Utlization Percentage}
+  	\begin{center}
+  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E7}}
+  	\end{center}
+  	\caption{Select Ranges from the Imported Dataset: EvalDataSet}
+\end{figure}
+	
+This dataset is now Split into Estimation and Validation datasets. The complete DataSet, EvalDataSet is dragged into the working data area. It is then chosen to select ranges within that to 	split into the Evaluation and Validation Datasets: EvalDataSetEstimation and EvalDataSetValidation. This is indicated in Figure 32, 33 and 34
+  \begin{figure}[H]
+	  	  	  	\begin{center}
+	  	  	  		\makebox[\textwidth]{\includegraphics[scale = 0.8]{E8}}
+	  	  	  	\end{center}
+	  	  	  	\caption{Choosing 80\% data as Estimation Data: EvalDataSetEstimation}
+
+    	\begin{center}
+    		\makebox[\textwidth]{\includegraphics[scale = 0.8]{E9}}
+    	\end{center}
+    	\caption{Choosing 20\% data as Estimation Data: EvalDataSetValidation}
+    \end{figure}	
+	
+	Now the split data sets need to be dragged into the Working Data Area and Validation Data area accordingly. This is depicted in Figure 35. 
+	
+	    \begin{figure}[H]
+	    	\begin{center}
+	    		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E10}}
+	    	\end{center}
+	    	\caption{Working Data and Validation Data Area}
+	    \end{figure}
+	
+	The next step is to estimate the models for above datasets. The state space mode estimation is shown in Figure 36. It provides options to specify the model order or we can specify a range of orders and the system would suggest which model order would best suit this scenario.
+	
+	    \begin{figure}[H]
+	    	\begin{center}
+	    		\makebox[\textwidth]{\includegraphics[scale=0.8]{E11}}
+	    	\end{center}
+	    	\caption{State Space Modeling}
+	    \end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.9\linewidth]{E12}
+			\captionof{figure}{Polynomial Model: ARX}
+			
+		\end{minipage}%
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=.9\linewidth]{E13}
+			\captionof{figure}{Polynomial Model: ARMAX}
+		\end{minipage}
+	\end{figure}
+	
+	Following the state space model estimation we estimate Polynomial models. In this context we focus specifically on ARX and ARMAX models. In ARX, we specify the orders of the polynomials A and B (na and nb) and the error co-efficients, nk. This is shown in Figure 37. 	For ARMAX modeling, we specify the order of the polynomials A, B and C (na, nb and nc) and the error co-efficients. Figure 38 shows this in the System Identification Toolbox.
+
+	The models estimated are validated against the validation dataset. We check the model output box to see the the accuracy of each of the model. It shows the best fitting models listed in order. This is depicted in Figure 39.
+	
+   \begin{figure}[H]
+		    	\begin{center}
+		    		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E14}}
+		    	\end{center}
+		    	\caption{Model Output with the Best Fits listed}
+   \end{figure}
+
+\subsection{Comparison of the Response Times without an AutoScaler}
+The previous section shows the Models for a dataset which was generated with the Autoscaler. In this section we look into a few charts displaying the Response Time fluctuations for a small load generation without an auto scaler and with an auto scaler. Figure 40 and Figure 41 shows this clearly. In the first graph we have the response time peaks as high as 750 milliseconds whereas in the next graph we notice that the maximum response times are reduced to around 100 for the almost the same load (in face a little additional load compared to the previous scenario).
+
+   \begin{figure}[H]
+   	\begin{center}
+   		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E15}}
+   	\end{center}
+   	\caption{Response Time versus Load without an Autoscaler}
+   \end{figure}
+   
+      \begin{figure}[H]
+      	\begin{center}
+      		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E16}}
+      	\end{center}
+      	\caption{Response Time versus Load with an Autoscaler}
+      \end{figure}
+
+\cleardoublepage
+\section{Conclusion}	 
+
+This chapter concludes the Thesis work. It is structured into three sections. This first section shortly summarizes the contributions of this thesis work. The second section lists some of the challenges and limitations faced during this thesis and the last sections provides ideas for Future work ideas in the direction of this Thesis.
+ 
+\subsection{Contribution of the Thesis}
+
+With Cloud Computing and Continuous Delivery on a significant rise, DevOps gained a lot of popularity. This thesis work successfully performs Monitoring of Applications hosted on Cloud Platforms. Cloud Monitoring has proven to be extremely useful especially for Cloud Developers and Cloud Operators (DevOps). Developers leverage this information for Feedback Driven Development and root cause identification. Operators depend on this information for provisioning the right amount of infrastructure.
+
+This thesis work proceeds in the Operations side with the idea of how to run Operations with Software Engineering ideas thereby reducing Downtime/Outages etc. It navigates from Feedback Driven Development (FDD) to Feedback Driven Operations. The relevant run-time metrics are chosen to design an auto-scaling system. This is slightly different from the many available Infrastructure autoscaling mechanisms. This is a Platform-level Autoscaler which increases or decreases the number of running application instances depending on the threshold parameters. Sometimes, adding infrastructure may not solve the problem whereas what is essential could be the efficient utilization of the existing infrastructure. Cloud Platforms need to take this into consideration and provide a Platform Auto-scaling mechanism. This thesis contributes an efficient Platform level Auto-scaler. 
+
+The monitoring data collected for making scaling decisions are also modeled to identify the correlation of the metrics. In this thesis work, the Average response time is estimated. It is extremely helpful to forecast the response time which aids in automating the Resource provisioning, and configuration management tools. 
+
+ \subsection{Limitations and Challenges}	
+ 
+ One of the challenges faced during this implementation is the choice of parameters to design the auto-scaler. This proves to be quite important as the decisions of Autoscaler is based on these parameters. The auto-scaler could be designed to work on any metric such as Response Time or CPU \% utilization. In this implementation, it was designed to scale based on the CPU. 
+ 
+ The evaluation is performed with a single application. It could be possibly evaluated with several other applications. Also, the app considered is a CPU intensive application. It can be performed on other applications that are CPU, memory, storage, database or data (streaming) intensive applications. Considerations to collect larger Datasets for modeling is also important. This could provide different aspects/design considerations to the Auto-scaler.
+ 
+ 
+\subsection{Future Work}
+
+On one side, the rule based Auto-scaler can be enhanced to combine the different metrics on which the scaling decision depends. Also the threshold values on which the scaling decisions are made can be verified to find a better threshold if applicable. This will involve testing the existing prototype on different types of applications to choose the right combination of metrics and the right minimum and maximum thresholds. 
+
+On the other side, modeling can be improved. We derive a model from the Monitoring Data. Modeling can be enhanced to achieve a better accuracy. In order to do this, we would require larger monitoring Datasets. Additionally, we can script the automation of this modeling for each application. This way we have a dynamic model depending on the application on which the Autoscaler is run. Using this dynamic model, we could make predictions of the Response Times customized for each application. These predictions can in turn be used in making the rule-based autoscaler a proactive one. 
 
 \clearpage
 	  
