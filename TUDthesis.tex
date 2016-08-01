@@ -66,6 +66,46 @@
 	description={Software-as-a-Service}%
 }
 
+\newglossaryentry{aws}{%
+	name={AWS},%
+	description={Amazon Web Services}%
+}
+
+\newglossaryentry{apm}{%
+	name={APM},%
+	description={Application Performance Monitoring}%
+}
+
+\newglossaryentry{ide}{%
+	name={IDE},%
+	description={Integrated Development Environment}%
+}
+
+\newglossaryentry{cd}{%
+	name={CD},%
+	description={Continuous Delivery}%
+}
+
+\newglossaryentry{aas}{%
+	name={AAS},%
+	description={Amazon Auto-Scaling}%
+}
+
+\newglossaryentry{lti}{%
+	name={LTI},%
+	description={Linear Time Invariant}%
+}
+
+\newglossaryentry{guid}{%
+	name={GUID},%
+	description={Globally Unique Identifier}%
+}
+
+\newglossaryentry{jdbc}{%
+	name={JDBC},%
+	description={Java DataBase Connectivity}%
+}
+
 \graphicspath{ {images/1/} {images/2/} {images/3/} {images/4/}{images/5/}}
 
 \hypersetup{
@@ -159,7 +199,7 @@
  \section{Introduction}
 	 \hfill \break
 	
-		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than local has led to innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as Amazon Web Services\cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial monetary setup costs. DevOps is a very popular term in cloud computing. It refers to the reduction in the gap between developers and operators \cite{httermann2012devops} . Owing to increased amount of run-time information availability in cloud, DevOps benefit a lot. Developers can make use of the information to optimize the code and visualize run-time behavior instantaneously, whereas operators can utilize the information to automate resource provisioning and capacity planning.
+		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than local has led to innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as \gls{aws} \cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial monetary setup costs. DevOps is a very popular term in cloud computing. It refers to the reduction in the gap between developers and operators \cite{httermann2012devops} . Owing to increased amount of run-time information availability in cloud, DevOps benefit a lot. Developers can make use of the information to optimize the code and visualize run-time behavior instantaneously, whereas operators can utilize the information to automate resource provisioning and capacity planning.
 		
 		
 		\par This chapter is structured into four sections. The first section provides the motivation of this thesis. The second section gives an insight into the problem statement which this thesis aims to solve. The third section details the contribution of the thesis and the final section provides how the following chapters are structured.
@@ -171,7 +211,7 @@
 	
 	\par The metrics that are monitored vary depending on the type of the application and the level of the cloud computing stack as shown in Figure \ref{fig:ccstack}. For instance, the metrics such as memory consumption, CPU utilization, network bandwidth utilization are considered to be at the Infrastructure level, whereas some other metrics such as response times of methods/procedures, the number of users accessing the application, maximum number of users who can use the application simultaneously, etc. are considered to be at the application level. Sometimes, the application level metrics depend on the primitive metrics at the infrastructure level and vice-versa.
 	
-	\par As cloud application development has become more common, the run time monitoring metrics of these applications are easily available through several application performance monitoring (APM) tools such as Amazon cloudwatch, New Relic, etc. Though a vast amount of information is made available through APM tools to the DevOps, how often the information is utilized is still an open question. APM tools do not provide any direct accessible feedback to the developers or operators, and hence most of the DevOps do not use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that take a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment takes place. This type of analytic and predictive feedback should be provided to the developers in their IDEs which otherwise may not be explored by the developers. This is because the information collected by APM tools are huge amount of log data that are quite tedious for manual interpretation. At the same time, on the cloud operations side, this information can be leveraged to provide automation of infrastructure provisioning and capacity planning. This technique of providing useful information from the monitoring data is known as Feedback driven development \cite{cito2015runtime}. \gls{fdd} that provides useful tools to the cloud DevOps is the focus of this thesis.	
+	\par As cloud application development has become more common, the run time monitoring metrics of these applications are easily available through several application performance monitoring (APM) tools such as Amazon cloudwatch, New Relic, etc. Though a vast amount of information is made available through \gls{apm} tools to the DevOps, how often the information is utilized is still an open question. \gls{apm} tools do not provide any direct accessible feedback to the developers or operators, and hence most of the DevOps do not use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that take a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment takes place. This type of analytic and predictive feedback should be provided to the developers in their \gls{ide}s which otherwise may not be explored by the developers. This is because the information collected by \gls{apm} tools are huge amount of log data that are quite tedious for manual interpretation. At the same time, on the cloud operations side, this information can be leveraged to provide automation of infrastructure provisioning and capacity planning. This technique of providing useful information from the monitoring data is known as Feedback driven development \cite{cito2015runtime}. \gls{fdd} that provides useful tools to the cloud DevOps is the focus of this thesis.	
 	
 	\subsection{Problem Statement}	
 	
@@ -209,7 +249,7 @@ From the above mentioned issues, it is therefore important to monitor relevant i
  
 	\subsection{Contribution}	
 	
-	The thesis contributes a new auto-scaling system that can be adapted to any cloud platform. It proposes a new monitoring system that collects relevant metrics to make important scaling decisions. Using the collected metrics, the design aims to provide an efficient feedback to the cloud DevOps. The collected feedback is integrated into the development environment (IDEs) so that developers are able to utilize the feedback to make their applications better scalable and highly available \cite{cito2015runtime}. On the other hand, this feedback can also be leveraged to automate configuration management and to facilitate dynamic infrastructure provisioning. In this thesis, the monitoring metrics are aggregated for a sufficient period to make scaling decision. Scaling decisions can depend on a single metric or even a combination of metrics that can be customized by the cloud application developer. 
+	The thesis contributes a new auto-scaling system that can be adapted to any cloud platform. It proposes a new monitoring system that collects relevant metrics to make important scaling decisions. Using the collected metrics, the design aims to provide an efficient feedback to the cloud DevOps. The collected feedback is integrated into the development environment (\gls{ide}s) so that developers are able to utilize the feedback to make their applications better scalable and highly available \cite{cito2015runtime}. On the other hand, this feedback can also be leveraged to automate configuration management and to facilitate dynamic infrastructure provisioning. In this thesis, the monitoring metrics are aggregated for a sufficient period to make scaling decision. Scaling decisions can depend on a single metric or even a combination of metrics that can be customized by the cloud application developer. 
 	
 	The thesis also models the monitored information collected by the auto-scaler to identify a suitable correlation model. The model provides a better understanding of the relation between the collected metrics. 
 	
@@ -250,7 +290,7 @@ From the above mentioned issues, it is therefore important to monitor relevant i
 			\label{fig:cd}
 		\end{figure}
 		
-		Most companies make use of this continuous delivery to roll out new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. CD has become a huge success and companies such as Google,Facebook etc. adopt CD of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months in the case of traditional software development. The feature needs to be delayed until the next release. Whereas in this CD approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called perpetual development where the code is always under continuous development and there is no stable release version for a particular product.  	\par Owing to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the sser Interface of the app, error and warning logs, infrastructure related data etc. are produced. There are existing APM Tools that collect this data and generate information out of it. Nevertheless, how this information could be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
+		Most companies make use of this continuous delivery to roll out new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. \gls{cd} has become a huge success and companies such as Google,Facebook etc. adopt \gls{cd} of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months in the case of traditional software development. The feature needs to be delayed until the next release. Whereas in this \gls{cd} approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called perpetual development where the code is always under continuous development and there is no stable release version for a particular product.  	\par Owing to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the sser Interface of the app, error and warning logs, infrastructure related data etc. are produced. There are existing \gls{apm} tools that collect this data and generate information out of it. Nevertheless, how this information could be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
 		
 		\subsubsection{Scalability, Reliability  and Availability in Cloud}
 		
@@ -336,13 +376,13 @@ From the above mentioned issues, it is therefore important to monitor relevant i
 	
 	\begin{itemize}
 	
-	\item{\textbf{Reactive Auto-scaling: }}Auto-scaling as provided by most of the cloud providers such as Amazon Web Services, Microsoft Azure, IBM Bluemix etc. are reactive. It is achieved by monitoring relevant metrics. Whenever a certain metric increases or decreases beyond a particular predefined threshold, additional instances are added or removed. This method which is more of a rule-based mechanism is a reactive auto-scaling method. This is easier to be implemented as it involves monitoring metrics, and framing rules and policies for scaling. 
+	\item{\textbf{Reactive Auto-scaling: }}Auto-scaling as provided by most of the cloud providers such as \gls{aws}, Microsoft Azure, IBM Bluemix etc. are reactive. It is achieved by monitoring relevant metrics. Whenever a certain metric increases or decreases beyond a particular predefined threshold, additional instances are added or removed. This method which is more of a rule-based mechanism is a reactive auto-scaling method. This is easier to be implemented as it involves monitoring metrics, and framing rules and policies for scaling. 
 	
 	Seelam et al. explain the rule based reactive autoscaler of IBM's Bluemix \gls{paas}, which is known as the Polyglot application \cite{seelam2015polyglot}. Polyglot autoscaler allows application developers to set thresholds based on which instances need to be added (scale-out) or removed (scale-in). These threshold values could be parameters such as CPU Utilization, memory and heap usage. Polyglot consists of the four components: agents which collect the performance information, a monitoring service which continuously monitors the health of the cloud application, a scaling service which makes the decision of whether scaling needs to be performed or not, and a persistence service to keep track of the enactment points (points where the application is scaled in time). While reactive scaling serves in most scenarios, the question arises whether it is capable to handle bursty traffic.
 
 \item{\textbf{Predictive Auto-scaling: }}Predictive auto-scaling comes handy to handle bursty workloads. Bursty traffic is a situation where a sudden unexpected number of users access the application, which could be triggered by a social media campaign. By analyzing the historic time series data, it may be possible to predict the workload at a future time, thereby enabling predictive auto-scaling. The effectiveness of this method depends on the efficiency of the workload prediction.
 
-Biswas et al. \cite{biswas2015predictive} introduce a predictive auto scaling technique that uses a Machine Learning engine to make predictions based on a deadline driven algorithm for predicting the future state of the system. Netflix\cite{Scryer1, Scryer2} describes a predictive auto-scaling tool, Scyer, used by Netflix to provision the correct number of Amazon Web Services \cite{aws} instances. This is different from the Amazon AutoScaling(AAS) \cite{aas}, which is a reactive one. Scryer's prediction engine is able to provision the resources based on two prediction algorithms to predict the workload. The prediction algorithms implemented are augmented linear regression based algorithm and fast fourier transformation based algorithm.
+Biswas et al. \cite{biswas2015predictive} introduce a predictive auto scaling technique that uses a Machine Learning engine to make predictions based on a deadline driven algorithm for predicting the future state of the system. Netflix\cite{Scryer1, Scryer2} describes a predictive auto-scaling tool, Scyer, used by Netflix to provision the correct number of \gls{aws} \cite{aws} instances. This is different from the \gls{aas} \cite{aas}, which is a reactive one. Scryer's prediction engine is able to provision the resources based on two prediction algorithms to predict the workload. The prediction algorithms implemented are augmented linear regression based algorithm and fast fourier transformation based algorithm.
 
 \item{\textbf{Hybrid Auto-scaling: }} Hybrid auto-scaling is a combination of both the reactive and predictive approaches. As explained by Netflix \cite{Scryer1}, Scryer tool works in co-ordination with the AAS for more efficient auto-scaling. Moore et al.\cite{moore2013coordinated} describe the architecture and implementation of platform insights, which is another hybrid auto-scaler that employs a reactive rule-based and a predictive model-based approach in a coordinated manner.
 \end{itemize}
@@ -386,7 +426,7 @@ Figure \ref{fig:state_space_model} shows a system described by a state space mod
 \label{fig:state_space_model}
 \end{figure}
 
-In state space modeling, the time derivative of the state variables are represented as a function of the state variable, and inputs, $dx/dt = f(x,u,t)$. Considering a linear time invariant(LTI) system, the state equation can be written as\cite{ljung1987system}: $$ dx/dt = Ax + Bu $$ where A and B are matrices with constant coefficients that weigh the system's state variable and inputs respectively. Similarly the output equation can be written as \cite{ljung1987system}: $$ y = Cx + Du $$ where C and D are matrices with constant coefficients that weight the system's state variables and inputs respectively. There are several physical systems where the D matrix is found to be a null matrix thereby reducing the output equation to $ y = Cx $, where the output depends on a weighted combination of the state variables.
+In state space modeling, the time derivative of the state variables are represented as a function of the state variable, and inputs, $dx/dt = f(x,u,t)$. Considering a \gls{lti} system, the state equation can be written as\cite{ljung1987system}: $$ dx/dt = Ax + Bu $$ where A and B are matrices with constant coefficients that weigh the system's state variable and inputs respectively. Similarly the output equation can be written as \cite{ljung1987system}: $$ y = Cx + Du $$ where C and D are matrices with constant coefficients that weight the system's state variables and inputs respectively. There are several physical systems where the D matrix is found to be a null matrix thereby reducing the output equation to $ y = Cx $, where the output depends on a weighted combination of the state variables.
 
 \subsubsection{Polynomial Models}
 	
@@ -477,9 +517,9 @@ This chapter briefly described the important topics relevant for this thesis. Ba
  \section{Design and Architecture}	
  \hfill \break
  
- In this chapter we look into the Overall Architectural design and the three major components of the proposed solution: Cloud Monitoring, Auto-scaling, and Data Modeling. Cloud Monitoring explains about the choice of the metrics collected and how this metric collection is performed and persisted. Auto-scaling details about how it leverages the monitored data to make the relevant scaling decisions. The persisted data is then modeled to find a correlation between the collected metrics and this is discussed under Data Modeling. 
+ In this chapter we look into the overall architectural design and the three major components of the proposed solution: cloud monitoring, auto-scaling, and data modeling. Cloud monitoring explains about the choice of the metrics collected and how this metric collection is performed and persisted. Auto-scaling details about how it leverages the monitored data to make the relevant scaling decisions. The persisted data is then modeled to find a correlation between the collected metrics and this is discussed under data modeling. 
  
- 	A sample application is deployed to the Cloud and monitored continuously. The monitoring metrics of the application are used for Modeling. Based on the monitoring service, an auto-scaler is designed. The Auto-Scaler aids the applications hosted in the Cloud to seamlessly scale-out and scale-in depending on several parameters. The Cloud Application Monitoring has paved way for several adaptations both in terms of Application (Source Code changes) and the Infrastructure. As mentioned about Feedback Driven Development in Chapter 2, Application level adaptation focuses on root cause identification and source code changes. In this design, we look into possibility of efficiently utilizing the monitoring metrics to perform Infrastructure adaptation.  This design focuses in deriving suitable enactment points where necessary scaling decisions are taken. 
+ 	A sample application is deployed to the cloud and monitored continuously. The monitoring metrics of the application are used for modeling. Based on the monitoring service, an auto-scaler is designed. The auto-scaler aids the applications hosted in the cloud to seamlessly scale-out and scale-in depending on several parameters. The cloud application Monitoring has paved way for several adaptations both in terms of application (source code changes) and the infrastructure. As mentioned about \gls{fdd}  in Chapter 2, application level adaptation focuses on root cause identification and source code changes. In this design, we look into possibility of efficiently utilizing the monitoring metrics to perform Infrastructure adaptation.  This design focuses in deriving suitable enactment points where necessary scaling decisions are taken. 
  
 \subsection{System Architecture} 
 
@@ -507,8 +547,8 @@ This chapter briefly described the important topics relevant for this thesis. Ba
  			 \end{figure}
 
 	\subsection{Monitoring Service} 
- 	The first component of the Architecture is the Monitoring Service. A sample application is deployed to the Cloud and it is monitored for certain metrics related to performance and load such as Response Times, Throughput, CPU Utilization etc. We leverage the fact that the application is on the cloud to get the instantaneous real-time metrics of the application. 
- 	\par Having access to the current run-time metrics could be useful in a wide range of scenarios that benefit both the development activities such as proactive production bug identification/fixing and operational activities such as scaling infrastructure. Alerts can also be set-up to notify the involved stakeholders when a specific metric crosses a predefined threshold value. The metrics are monitored and persisted to be utilized by the other components. These metrics include information such as Response Time of Requests, Throughput, the CPU \% utilization, the memory \% utilization, the Disk \% utilization etc. Once the application is hosted in the Cloud, the monitoring service is started. 	The monitoring service collects the required metrics from the platform log data and the platform APIs. These metrics are aggregated to be consumed by the other components. 
+ 	The first component of the architecture is the monitoring service. A sample application is deployed to the cloud and it is monitored for certain metrics related to performance and load such as response times, throughput, CPU utilization etc. We leverage the fact that the application is on the cloud to get the instantaneous real-time metrics of the application. 
+ 	\par Having access to the current run-time metrics could be useful in a wide range of scenarios that benefit both the development activities such as proactive production bug identification/fixing and operational activities such as scaling infrastructure. Alerts can also be set-up to notify the involved stakeholders when a specific metric crosses a predefined threshold value. The metrics are monitored and persisted to be utilized by the other components. These metrics include information such as response time of requests, throughput, the CPU \% utilization, the memory \% utilization, the disk \% utilization etc. Once the application is hosted in the Cloud, the monitoring service is started. 	The monitoring service collects the required metrics from the platform log data and the platform APIs. These metrics are aggregated to be consumed by the other components. 
  	
  	 	 \begin{figure}[!h]
  	 	 	\begin{center}
@@ -522,11 +562,11 @@ This chapter briefly described the important topics relevant for this thesis. Ba
  	
  	\subsection{Scaling Service}
  	
-		The second component of the design is the Scaling Service. As mentioned in Section 2.1, scaling at the infrastructure level is different from the scaling at the platform level. In this thesis, the scaling service performs its actions at the platform level, i.e. it adds or removes application instances. The cloud application developer can set scaling policies and rules. The scaling service takes into consideration these rules. It compares the metric values collected by the Monitoring Component and makes the scaling decision based on the policies. Monitoring happens continuously and the scaling decision happens once in every specified interval knows as the \textbf{cool-down-period}. 
+		The second component of the design is the scaling service. As mentioned in section 2.1, scaling at the infrastructure level is different from the scaling at the platform level. In this thesis, the scaling service performs its actions at the platform level, i.e. it adds or removes application instances. The cloud application developer can set scaling policies and rules. The scaling service takes into consideration these rules. It compares the metric values collected by the Monitoring Component and makes the scaling decision based on the policies. Monitoring happens continuously and the scaling decision happens once in every specified interval knows as the \textbf{cool-down-period}. 
 		
-	\par The monitoring data within the last cool-down interval is retrieved from the database to make the scaling decision as shown in the Figure \ref{fig:autoscaler}. The cool-down period is to avoid any oscillations in the metrics due to Under-provisioning and Over-provisioning of resources. If scaling happens continuously if could lead to undesirable oscillations and hence we have a pre-defined period called the cool-down-period, which provides some time for the system to stabilize after scaling occurs. 	
+	\par The monitoring data within the last cool-down interval is retrieved from the database to make the scaling decision as shown in the Figure \ref{fig:autoscaler}. The cool-down period is to avoid any oscillations in the metrics due to under-provisioning and over-provisioning of resources. If scaling happens continuously if could lead to undesirable oscillations and hence we have a pre-defined period called the cool-down-period, which provides some time for the system to stabilize after scaling occurs. 	
 		
- 	This auto-scaler performs scaling of application instances. The cloud providers have an agreement with the Cloud consumers regarding certain values such as the minimum and maximum number of Application instances and Domain Experts can specify minimum and maximum threshold values of scaling metrics. The values are specified in SLA's and policies.
+ 	This auto-scaler performs scaling of application instances. The cloud providers have an agreement with the cloud consumers regarding certain values such as the minimum and maximum number of application instances and domain experts can specify minimum and maximum threshold values of scaling metrics. The values are specified in SLA's and policies.
  
  	The scaling service further aggregates the collected metrics information by the monitoring service. It utilizes the metrics obtained in the last cool-down period time slot. The final decision is made depending on the aggregated metric values during the latest cool-down period as shown in the Figure \ref{fig:autoscaler}. These values are compared against the values specified in the SLAs/policies. Both scaling out and scaling in capabilities are performed by this service.
  	 	    
@@ -544,9 +584,9 @@ This chapter briefly described the important topics relevant for this thesis. Ba
  	
  	The third part of the design focuses on modeling the monitoring data. In this step, load is generated on the application and the collected monitoring data is used to derive a model. The model identifies a correlation between the metrics collected. In our scenario, we have multiple data dimensions available and hence we consider multi-variate modeling. The models that are discussed in section 2.5 are considered for estimation. 
  	
-	 Identification of this correlation could be used to predict the future values of some metrics which proves to be extremely useful to adapt the infrastructure based on predictions of the model. It also gives rise to newer methods of root cause identification of production issues using Feedback Driven Development. Mining the large amount of production data is definitely challenging.
+	 Identification of this correlation could be used to predict the future values of some metrics which proves to be extremely useful to adapt the infrastructure based on predictions of the model. It also gives rise to newer methods of root cause identification of production issues using \gls{fdd}. Mining the large amount of production data is definitely challenging.
  	
- 	The data collected by the Monitoring Service of the AutoScaler is imported to perform the Data Modeling. Data Modeling is broadly classified into two phases: Estimation phase and the Validation phase. But before the estimation phase, the data needs to be pre-processed. Preprocessing involves tasks such as removal of outliers or error data, data conversion steps, choosing specific data range, etc. 
+ 	The data collected by the Monitoring Service of the auto-scaler is imported to perform the data modeling. Data Modeling is broadly classified into two phases: Estimation phase and the Validation phase. But before the estimation phase, the data needs to be pre-processed. Preprocessing involves tasks such as removal of outliers or error data, data conversion steps, choosing specific data range, etc. 
  	
  	After preprocessing, the dataset is split into estimation data and validation data. As per the 80-20 rule, the data is first roughly split into two parts. The first portion consists of about 80\% of the data and this data is used for model estimation. The remaining 20\% of the data is used to validate the model. The 80-20 rule is not a standard one and it can be varied depending on the application, but it is a good decision to start with. Sometimes, better model accuracy could be obtained by splitting the dataset in a different manner. The total flow of the data modeling is depicted in Figure \ref{fig:data_modeling_flowchart}.
  	
@@ -556,21 +596,22 @@ This chapter briefly described the important topics relevant for this thesis. Ba
  	
  	State space model estimation is a simple but powerful technique. The user needs to provide just one parameter: The model order. Choosing the optimal model order is important. The model order determines the size of the State Variable vector, $x_i$. The model estimation determines the values of the state variables using the estimation data inputs and outputs. Once the state variables are determined, the model can estimate the output at anytime later using the inputs at that time.
 
-Polynomial model estimation requires to specify the orders of the polynomials. Depending on the type of the Polynomial model: ARX, ARMAX, Output-Error or Box-Jenkins,  the orders of the corresponding polynomials are specified. The model estimates the polynomial co-efficients.
+Polynomial model estimation requires to specify the orders of the polynomials. Depending on the type of the polynomial model: ARX, ARMAX, Output-Error or Box-Jenkins,  the orders of the corresponding polynomials are specified. During the estimation phase, the coefficients of the corresponding polynomials are estimated.
 
-
+\begin{figure}[H]
+	\begin{center}
+		\makebox[\textwidth]{\includegraphics[scale = 0.79]{C8}}
+	\end{center}
+	\caption{Validating the Model}
+	\label{fig:data_modeling_flowchart}
+\end{figure}
   
 \subsubsection{Phase 2: Validation phase}
 
-The estimated model needs to be validated against the Validation Dataset. The accuracy of the model is calculated by comparing the output values estimated by the model with the actual
-\begin{figure}[H]
-  	\begin{center}
-  		\makebox[\textwidth]{\includegraphics[scale = 0.79]{C8}}
-  	\end{center}
-  	\caption{Validating the Model}
-  	\label{fig:data_modeling_flowchart}
-  \end{figure}
-  output values of the validation data set. The data modeling process maybe repeated by varying parameters such as model orders etc. to derive a model which is accurate enough. The desired accuracy may vary depending on the application.
+The estimated model needs to be validated. It is validated against the validation dataset. The accuracy of the model is calculated by comparing the output values estimated by the model with the actual output values of the validation data set. The data modeling process maybe repeated by varying parameters such as model orders etc. to derive a model which is accurate enough. The desired accuracy may vary depending on the application.
+
+
+
 
  \cleardoublepage
  
@@ -581,11 +622,11 @@ The estimated model needs to be validated against the Validation Dataset. The ac
 This chapter briefs about the implementation of the proposed design in the previous chapter. The Implementation and Evaluation is performed on a cloud application hosted in SAP's HANA Cloud Platform. The chapter briefly explains about deploying the application in HCP, implementing the monitoring service and scaling service, and modeling the collected metrics data.
 
 \subsection{System Footprint}
-The implementation of the Design is on SAP's \gls{hcp} \cite{hcp}. It is very convenient to build new applications or extend existing applications on top of the \gls{hcp}. \gls{hcp} is a \gls{paas} that provides unique in-memory databases and application services. The \gls{hcp} platform is built based on the open source \gls{paas}, Cloud Foundry. \gls{cf} platform is deployed using the Bosh tool on top of openstack Infrastructure. Bosh is an open source tool for deployment of Cloud foundry on top of any \gls{iaas} provider. It is also useful for reverse engineering and distributed systems monitoring.
+The implementation of the design is on SAP's \gls{hcp} \cite{hcp}. It is very convenient to build new applications or extend existing applications on top of the \gls{hcp}. \gls{hcp} is a \gls{paas} that provides unique in-memory databases and application services. The \gls{hcp} platform is built based on the open source \gls{paas}, Cloud Foundry. \gls{cf} platform is deployed using the bosh tool on top of openstack Infrastructure. Bosh is an open source tool for deployment of Cloud foundry on top of any \gls{iaas} provider. It is also useful for reverse engineering and distributed systems monitoring.
 
-The Loggregator component of Cloud Foundry is responsible for logging. Loggregator collects all the logs from both the application and the Cloud Foundry system components, which interact with the application during execution. These Cloud Foundry Logs and API's are used to collect and aggregate the metrics. 
+The loggregator component of \gls{cf} is responsible for logging. Loggregator collects all the logs from both the application and the \gls{cf} system components, which interact with the application during execution. These \gls{cf} logs and API's are used to collect and aggregate the metrics. 
 
-The Monitoring and Scaling services are developed as a Java application. The monitoring data collected are persisted in the MySQL database. This data is modeled by using MATLAB's System Identification Toolbox. Table \ref{tab:system_footprint} summarizes the Implementation System Footprint.
+The monitoring and scaling services are developed as a java service. The monitoring data collected are persisted in the MySQL database. This data is modeled by using MATLAB's System Identification Toolbox. Table \ref{tab:system_footprint} summarizes the system footprint of this implementation.
 
 \begin{table}[H]
 	\centering
@@ -654,7 +695,7 @@ HttpURLConnection con = (HttpURLConnection) obj
 con.setRequestMethod("GET");
 con.setRequestProperty("Authorization", oAuthToken);
 \end{lstlisting}	
-	In the above code snippet, the authorization token to access the \gls{cf} API is fetched by making a call to the cf command: $cf oauth-token$. The URL is the \gls{cf} API end point and the :guid in the URL is the GUID of the application in cloud. It is retrieved from the Environment variables of the application. The environmnetal variables is accessed by the \gls{cf} command: $cf env app-name$
+	In the above code snippet, the authorization token to access the \gls{cf} API is fetched by making a call to the cf command: $cf oauth-token$. The URL is the \gls{cf} API end point and the :guid in the URL is the \gls{guid} of the application in cloud. It is retrieved from the Environment variables of the application. The environmnetal variables is accessed by the \gls{cf} command: $cf env app-name$
 	
 	\item\textbf{{CPU Utilization, Memory Utilization, and the Disk Utilization as Percentage}} 
 	 The CPU, Memory and Disk Utilization are fetched from the \gls{cf} API the same way as the number of running instances. The URL for this GET request is:  \newline
@@ -717,7 +758,8 @@ In the read thread, the logs are parsed to retrieve the response time informatio
  	\label{fig:database_schema_screenshot}
  \end{figure}	
 
-The monitoring service persists the data into this database. A JDBC connection to the database is established and the data is inserted into the table using the statement $INSERT INTO modeldata VALUES TimeStamp AvgResponseTime RequestsPerSecond NoInstances Memory\_percent Disk\_percent Cpu\_percent$.
+The monitoring service persists the data into this database. A \gls{jdbc} connection to the database is established and the data is inserted into the table using the statement $INSERT\; INTO \;modeldata \;VALUES \;TimeStamp \;AvgResponseTime \;RequestsPerSecond \\ 
+NoInstances \;Memory\_percent\; Disk\_percent \; Cpu\_percent$.
 
 		
 \end{itemize}	
@@ -781,7 +823,7 @@ public void cfHorizontalScaling(int noInstances, String appName){
 						 disk_percent];
  output = [avgResponseTime];
  \end{lstlisting}
-  The input and output vectors are imported into the Sytem Identification Toolbox as shown in Figure \ref{fig:dataset_import}. The data is now ready to be split into Estimation Data and Validation data. To do this we need to click on the Select Range option underneath preprocess step as shown in Figure \ref{fig:split_dataset}. 
+  The input and output vectors are imported into the Sytem Identification Toolbox as shown in Figure \ref{fig:dataset_import}. The data is now ready to be split into estimation Data and validation data. To do this we need to click on the select range option underneath preprocess step as shown in Figure \ref{fig:split_dataset}. 
   
       \begin{figure}[h]
       	\begin{center}
@@ -798,7 +840,7 @@ public void cfHorizontalScaling(int noInstances, String appName){
     	\caption{Importing Data into System Identification Toolbox}
     	\label{fig:dataset_import}
     \end{figure}	
- Once the data is split, the datasets are dragged to the corresponding Working Data area and Validation areas. Then the Model Estimation needs to be performed. The model that needs to be estimated for the data needs to be chosen underneath the Estimate box. The estimated models include State space models, and Polynomial models: ARX and ARMAX models.
+ Once the data is split, the datasets are dragged to the corresponding working data area and validation area. Then the model estimation needs to be performed. The model that needs to be estimated for the data needs to be chosen underneath the estimate box. The estimated models include State space models, and Polynomial models: ARX and ARMAX models.
 	\begin{itemize}
 		\item{\textbf{State Space Model}:} The state space mode estimation is shown in Figure \ref{fig:state_space_matlab}. It provides options to specify the model order or we can specify a range of orders and the system would suggest which model order would best suit this scenario. The model order will determine the size of the state variable vector which in turn will determine the output at a certain time in the future given the inputs at that time.
 		
@@ -837,7 +879,7 @@ public void cfHorizontalScaling(int noInstances, String appName){
  \section{Evaluation}
  \hfill \break
  
- In this chapter, the evaluation of our implementation is discussed. A sample guest book application is deployed to HCP, and load is generated on the app. The metric collection by monitoring service and automatic scaling of instances are tested and verified. This forms the first part of the contribution of the thesis. The second part focuses on deriving a correlation model between the metrics. The collected metric information is used evaluate the correlation model. 
+ In this chapter, the evaluation of our implementation is discussed. A sample guest book application is deployed to \gls{hcp}, and load is generated on the app. The metric collection by monitoring service and automatic scaling of instances are tested and verified. This forms the first part of the contribution of the thesis. The second part focuses on deriving a correlation model between the metrics. The collected metric information is used evaluate the correlation model. 
 
 	\subsection{Sample Application under consideration}
 We consider a sample web application hosted in the \gls{hcp}. This is a Guest book application which provides a web interface for the users to enter the data as shown in Figure \ref{fig:guestbook_ui}. 
@@ -876,7 +918,7 @@ public long fibonacciRecusion(int number){
 \caption{Manifest.yml file of the Guestbook application}
 \label{fig:guestbook_manifest}
 \end{figure}
-The manifest file of this application is shown in Figure \ref{fig:guestbook_manifest}. The app is deployed to Cloud Foundry using the following command: $ cf push \: masterthesisdemo\_d063995 $. The cf push command reads the attributes from the manifest.yml file. So, the app is created in the cloud with the name "masterthesisdemo$\_$d063995", and the war file specified in the path is deployed. The values specified in the manifest are used during the initial deployment. In this scenario, 1 instance of the application is started with a memory of 256 MB.	
+The manifest file of this application is shown in Figure \ref{fig:guestbook_manifest}. The app is deployed to \gls{cf} using the following command: $ cf push \: masterthesisdemo\_d063995 $. The cf push command reads the attributes from the manifest.yml file. So, the app is created in the cloud with the name "masterthesisdemo$\_$d063995", and the war file specified in the path is deployed. The values specified in the manifest are used during the initial deployment. In this scenario, 1 instance of the application is started with a memory of 256 MB.	
 	\subsection{Load Generation on the Sample Application}
 	
  We use Apache Jmeter to generete load on our application. A test plan is created in Jmeter and it is configured to contain 5 thread groups. Each thread group is set to run one after the other (serial execution). The first thread group generates 100 users simultaneously over a ramp up period of 50 seconds. Each of the thread groups are set to loop for a loop counter of 3600. In the following thread groups, the number of threads (users) are increased to 200, 400, 600, 800 and 1000 respectively. The Jmeter Test Plan configuration is shown in Figure \ref{fig:jmeter_testplan}. Before we run the Test plan, the Autoscaling service is started. This means the application is now being monitored by the Monitoring Service and scaling service is activated. Now we execute the Test plan to see if our application performs monitoring and scaling consistently.
@@ -891,9 +933,9 @@ The manifest file of this application is shown in Figure \ref{fig:guestbook_mani
 	
 	\subsection{Scaling out and Scaling in of the the application Instances}
 		
-	In this section, the results of scaling service is demonstrated. As and when the load increases, it can be noted that the scaling service creates and adds more instances of the application. This is because the CPU utilization of the instances go up as our sample application under consideration is a CPU intensive one. This can be verified in the Command Line console as well. Figure \ref{fig:cf_cli} shows the statistics of application instances in the console. We notice that the CPU column shows a huge spike in the \% utilization of CPU. The scaling out happens until the values falls below the threshold CPU value, which is 80\% for this evaluation.
+	In this section, the results of scaling service is demonstrated. As and when the load increases, it can be noted that the scaling service creates and adds more instances of the application. This is because the CPU utilization of the instances go up as our sample application under consideration is a CPU intensive one. This can be verified in the command line console as well. Figure \ref{fig:cf_cli} shows the statistics of application instances in the console. We notice that the CPU column shows a huge spike in the \% utilization of CPU. The scaling out happens until the values falls below the threshold CPU value, which is 80\% for this evaluation.
 	
-	Figure \ref{fig:responsetTime_Instances} shows the Graph indicating scaling action performed. The graph on top, y1 denotes the Load (Requests per second). The graph beneath, u1 shows the number of application instances. The x axis indicates the time. In this scenario, we collected about 2000 records and the x axis indicates these relative values. From this graph we infer that as the load increases, the number of instances also increases upto 7 and then once the load generation is turned off the number of instances reduces upto 1. In this scenario, 7 is the maximum number of instances, and 1 is the minimum number of instances configured as an SLA. This depicts the scaling out and scaling in procedures. 
+	Figure \ref{fig:responsetTime_Instances} shows the graph indicating scaling action performed. The graph on top, y1 denotes the load (requests per second). The graph beneath, u1 shows the number of application instances. The x axis indicates the time. In this scenario, we collected about 2000 records and the x axis indicates these relative values. From this graph we infer that as the load increases, the number of instances also increases upto 7 and then once the load generation is turned off the number of instances reduces upto 1. In this scenario, 7 is the maximum number of instances, and 1 is the minimum number of instances configured as an SLA. This depicts the scaling out and scaling in procedures. 
 	
 	  \begin{figure}[h]
 	  	\begin{center}
@@ -912,7 +954,7 @@ The manifest file of this application is shown in Figure \ref{fig:guestbook_mani
 	  	  \end{figure}
 	
 	\subsection{Persistence of data in MySQL Database}
-		In this section, the results of monitoring service is demonstrated. It continuously collects the information and persists it into the MySQL database.  Figure \ref{fig:db_rows} shows the data stored in the MySql DB. The dimensions persisted are: time stamp of the record, average response time, requests per second, number of instances, memory utilization as percentage, disk utilization as percentage, and CPU \% Utilization. The screenshot also shows the number of instances gradually increasing from 1 until 7 which is the minimum and maximum instances set during the evaluation that can be verified in Figure \ref{fig:autoscaler_sla_policies}. 
+		In this section, the results of monitoring service is demonstrated. It continuously collects the information and persists it into the MySQL database.  Figure \ref{fig:db_rows} shows the data stored in the MySql DB. The dimensions persisted are: time stamp of the record, average response time, requests per second, number of instances, memory utilization as percentage, disk utilization as percentage, and CPU \% utilization. The screenshot also shows the number of instances gradually increasing from 1 until 7 which is the minimum and maximum instances set during the evaluation that can be verified in Figure \ref{fig:autoscaler_sla_policies}. 
 	
 		  	  \begin{figure}[h]
 		  	  	\begin{center}
@@ -938,7 +980,7 @@ The manifest file of this application is shown in Figure \ref{fig:guestbook_mani
 	
 \begin{figure}
 	\begin{center}
-		\makebox[\textwidth]{\includegraphics[scale = 0.78]{graphs.pdf}}
+		\makebox[\textwidth]{\includegraphics[scale = 0.76]{graphs.pdf}}
 	\end{center}
 	\caption{Graph showing the Output Y1:Average Response Time and the Inputs U1, U2, U3, U4 and U5: Requests Per Second, Number of instances, CPU, Memory and Disk utilization }
 	\label{fig:output_responsetime_input_5}
@@ -1020,9 +1062,9 @@ This chapter concludes the thesis by providing a short summary of the contributi
  
 \subsection{Contribution of the Thesis}
 
-With Cloud Computing and Continuous Delivery on a significant rise, DevOps gained a lot of popularity. This thesis work successfully performs Monitoring of Applications hosted on Cloud Platforms. Cloud Monitoring has proven to be extremely useful especially for Cloud Developers and Cloud Operators (DevOps). Developers leverage this information for Feedback Driven Development and root cause identification. Operators depend on this information for provisioning the right amount of infrastructure.
+With cloud computing and \gls{cd} on a significant rise, DevOps gained a lot of popularity. This thesis work successfully performs monitoring of applications hosted on cloud platforms. Cloud monitoring has proven to be extremely useful especially for cloud developers and cloud operators (DevOps). Developers leverage this information for \gls{fdd} and root cause identification. Operators depend on this information for provisioning the right amount of infrastructure.
 
-This thesis proceeds in the Operations side with the idea of how to run Operations with Software Engineering ideas thereby reducing Downtime/Outages etc. It navigates from \gls{fdd} to Feedback Driven Operations. The relevant run-time metrics are chosen to design an auto-scaling system. This is slightly different from the many available Infrastructure autoscaling mechanisms. This is a platform-level Auto-scaler which increases or decreases the number of running application instances depending on the threshold parameters. Sometimes, adding infrastructure may not solve the problem whereas what is essential could be the efficient utilization of the existing infrastructure. Cloud Platforms need to take this into consideration and provide a Platform Auto-scaling mechanism. This thesis contributes an efficient platform level Auto-scaler. 
+This thesis proceeds in the operations side with the idea of how to run operations with software engineering ideas thereby reducing downtime/outages etc. It navigates from \gls{fdd} to Feedback Driven Operations. The relevant run-time metrics are chosen to design an auto-scaling system. This is slightly different from the many available infrastructure auto-scaling mechanisms. This is a platform-level auto-scaler which increases or decreases the number of running application instances depending on the threshold parameters. Sometimes, adding infrastructure may not solve the problem whereas what is essential could be the efficient utilization of the existing infrastructure. Cloud Platforms need to take this into consideration and provide a Platform Auto-scaling mechanism. This thesis contributes an efficient platform level Auto-scaler. 
 
 The monitoring data collected for making scaling decisions are also modeled to identify the correlation of the metrics. In this thesis, the Average response time is estimated. It is extremely helpful to forecast the response time which aids in automating the Resource provisioning, and configuration management tools. 
 
