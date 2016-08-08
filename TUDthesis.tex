@@ -6,14 +6,38 @@
 \usepackage{cite}
 \usepackage{hyperref}
 \usepackage{float}
-\usepackage{listings}
-\usepackage{glossaries}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-
 \usepackage{titlesec}
 \titleformat{\section}
 {\normalfont\fontsize{20}{25}\bfseries}{\thesection}{1em}{}
 
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\color{dkgreen},
+	identifierstyle=\itshape\color{blue!40!black},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	frame=single,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+
+\usepackage{glossaries}
+
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \makeglossaries
 
 \newglossaryentry{fdd}{%
@@ -127,7 +151,7 @@
 }
 
 \begin{document}
-  \thesistitle{Feedback Driven Development of Cloud Applications} 
+	\thesistitle{Feedback Driven Development of Cloud Applications} 
   %\linebreak[1]Corporate-Design f"ur {\LaTeX}!}%
     {Feedback Driven Development of Cloud Applications}
   \author{Harini Gunabalan}
@@ -138,7 +162,6 @@
   \department{Department of Computer Science}
   \group{Software Technology Group}
   \dateofexam{31 May 2015}{31 May 2015}
-  \tuprints{12345}{1234}
   \makethesistitle
   \affidavit{Harini Gunabalan}
 \cleardoublepage
@@ -156,26 +179,26 @@
 	\vspace*{\fill}
 	\clearpage
 
-
+	\hfill 	
 \begin{abstract}
 	
-	\hfill 	
+	\hfill 	\break
 	
 
 	
-	Over the last few years, the Cloud Computing paradigm has gained a lot of importance in both academia and industry. Cloud computing has influenced software development to a great extent, especially how developers and operators work. It has given rise to the term DevOps bringing the developers and operators very close. The increasing adoption of the DevOps approach has led to the removal of boundaries between development and operations \cite{httermann2012devops}. 
+	Over the past few years, Cloud Computing paradigm has gained a lot of importance in both academia and industry. Cloud computing has influenced software development to a great extent by introducing new concepts such as continuous delivery and elasticity \cite{humble2010continuous}. It has given rise to the term 'DevOps', by blending the working of developers and operators due to the requirement of frequent code deployments. The increasing adoption of DevOps has led to the removal of boundaries between development and operations, thereby providing a production-like staging environment right from the start of the development phase \cite{httermann2012devops}. Applications running on Cloud environment generate run-time production data. Making this run-time feedback available to DevOps in an accessible format to adapt accordingly, is known as Feedback Driven Development (FDD) \cite{cito2015runtime} 
 	\leavevmode
 	\newline
 
-	Among the three layers of the Cloud Computing stack: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service(PaaS) and Software-as-a-Service(SaaS), Developers are mainly concerned with the PaaS which allows them to focus on the application development without worrying about hardware, infrastructure and the software environment. Operators are more concerned with the infrastructure layer to monitor and provide sufficient resource provisioning and capacity planning.
+	Among the three layers of Cloud Computing stack namely Infrastructure-as-a-Service (IaaS), Platform-as-a-Service(PaaS) and Software-as-a-Service(SaaS), 'developers' are mainly concerned with the PaaS, which allows them to focus on application development without worrying about the infrastructure details such as hardware, network, operating systems and the software environment. 'Operators' are more concerned with the infrastructure layer to monitor and provide sufficient resource provisioning and capacity planning.
 	\leavevmode
 	\newline
 	
-	 Leveraging the fact that the application is hosted in the cloud, there are several metrics that can be monitored in cloud. There are also several cloud monitoring tools that can be used to monitor the performance, usage and other aspects of the cloud application. Though these tools exist, the information provided by them are mostly cumbersome log messages or graphs showing a variety of metrics. The DevOps mostly do not want to manually go through this information to utilize them. However, these logs and graphs can be useful to capture production issues that occur at scale which normally could not be captured by profilers. Making this run-time feedback available in an accessible format to the the DevOps is known as Feedback Driven Development (FDD) \cite{cito2015runtime}. 
+	 Leveraging the fact that applications are hosted in the cloud, there are several metrics that can be monitored. There are also several cloud monitoring tools that can be used to monitor the performance, app usage, resource usage, and other aspects of the cloud application. Though these tools exist, the information provided by them are mostly in the form of cumbersome log messages or graphs showing a wide variety of metrics. It is not usually preferred by the DevOps nor is it efficient to manually go through and analyze this information to utilize them. Nonetheless, these logs and graphs can be useful to capture production issues that occur at scale which normally could not be captured by profilers. Continuous monitoring of metrics from these logs can be utilized to improve scalability in cloud. It can be realized by monitoring the log data and deriving scaling decisions whenever necessary.
 	\leavevmode
 	\newline
 
-	This Thesis performs cloud monitoring to design and implement a platform level auto-scaler. Developers can continue to deploy new features and operators do not have to manually provision more application instances as the usage goes higher. The auto-scaler can also be configured to work with customizable metrics or a combination of metrics that is flexible to be configured. The monitoring information and scaling decisions are persisted to derive a correlation model between the metrics.
+	This Thesis involves research about cloud monitoring to design and implement a platform level auto-scaler. Developers can continue to deploy new features and operators do not have to manually provision more application instances as the usage goes higher. The auto-scaler can also be configured to work with customizable metrics or a combination of metrics that is flexible to be configured. The monitoring information and scaling decisions are used to derive a correlation model between the metrics collected.
 	
 
 \end{abstract}  
@@ -199,10 +222,10 @@
  \section{Introduction}
 	 \hfill \break
 	
-		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than local has led to innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as \gls{aws} \cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial monetary setup costs. DevOps is a very popular term in cloud computing. It refers to the reduction in the gap between developers and operators \cite{httermann2012devops}. Owing to increased amount of run-time information available immediately in the cloud, DevOps benefit a lot. Developers can make use of this information to optimize the code by visualizing run-time behavior, whereas operators can utilize the information to automate resource provisioning and capacity planning.
+		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than locally has led to innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as \gls{aws} \cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial monetary setup costs. DevOps is a very popular term in cloud computing. It refers to the reduction in the gap between developers and operators \cite{httermann2012devops}. Owing to increased amount of run-time information available immediately in the cloud, DevOps benefit a lot. Developers can make use of this information to optimize the code by visualizing run-time behavior, whereas operators can utilize the information to automate resource provisioning and capacity planning.
 		
 		
-		\par This chapter is structured into four sections. The first section provides the motivation of this thesis. The second section gives an insight into the problem statement which this thesis aims to solve. The third section details the contribution of the thesis and the final section provides how the following chapters are structured.
+		\par This chapter provides us the motivation behind this topic, gives an insight into the problem statement that this thesis aims to solve, summarizes the contribution of the thesis, and finally describes how the following chapters are structured.
 	
 	
 	\subsection{Motivation}
@@ -219,7 +242,7 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 
  \begin{figure}
  \begin{center}
-  \makebox[\textwidth]{\includegraphics[scale=0.8]{1-1}}
+  \makebox[\textwidth]{\includegraphics[scale=0.8]{1-1.pdf}}
 \end{center}
 \caption{Cloud computing stack}
 \label{fig:ccstack}
@@ -256,13 +279,17 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 	
 	\subsection{Structure of the thesis}
 
-	\par The rest of the thesis is structured into five chapters.  Chapter 2 includes background information and presents the state of the art of topics related to this thesis: cloud monitoring, auto-scaling, data modeling, and feedback driven development. 
+	\par The rest of the thesis is structured into five chapters.
+	
+	Chapter 2 includes background information and presents the state of the art of topics related to this thesis: cloud monitoring, auto-scaling, data modeling, and feedback driven development. 
 	
 	Chapter 3 provides an overview of the high-level system design made in this research work. It proposes a new cloud monitoring-scaling framework for making the cloud applications scalable. It also provides a design for deriving a correlation model for the monitored metrics.
 	
 	Chapter 4 explains the implementation of the proposed design on a lower fine-grained level. Interesting implementation details, the tools and technologies used,  and the system footprint are also provided.  
 	
-	Chapter 5 evaluates the implemented system and illustrates the monitoring and scaling of a sample application. The metrics monitored are modeled and a correlation model is derived as well. Finally, chapter 6 concludes the thesis and outlines future work ideas.
+	Chapter 5 evaluates the implemented system and illustrates the monitoring and scaling of a sample application. The metrics monitored are modeled and a correlation model is derived as well. 
+	
+	Finally, chapter 6 concludes the thesis and outlines future work ideas.
 
 % Example of Footnote    
 %     \textbf{Alle Vordefinierten Texte sind, wie verbindlich vorgeschrieben, in der hessischen Amtssprache
@@ -274,36 +301,36 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
  \section{State of the Art}
   \hfill \break
  	
-	This chapter presents the state of art of the topics relevant for this thesis. Properties of cloud computing such as continuous delivery, scalability, reliability and availability, are explained. The state of the art concerning the following topics are discussed in detail: \gls{fdd}, cloud monitoring, auto-scaling, data modeling, and performance analysis using source code history in evolving software.
+	This chapter presents the state of art of the topics relevant for this thesis. We explain the properties of cloud computing such as continuous delivery, scalability, reliability and availability. We also discuss the state of the art concerning the following topics in detail: \gls{fdd}, cloud monitoring, auto-scaling, data modeling, and performance analysis using source code history in evolving software.
 	
 		\subsection{Cloud computing basic concepts}
 		
-		Software release cycles in cloud applications are discussed in this section. It also briefs about aspects such as scalability, reliability and availability in cloud.
+		In this section, we explain software release cycles in cloud applications. We also brief about aspects such as scalability, reliability and availability in cloud.
 		
 		\subsubsection{Continuous delivery in cloud development}
-		As classic software development is compared with that of software development in cloud, there has been a huge change in the frequency of software version releases. Deployment cycles has been reduced from months to days and sometimes even within a few hours the next version is released. This process is referred to continuous delivery(CD) in the cloud computing terms \cite{humble2010continuous}. This is shown in Figure \ref{fig:cd}. 
+		If we compare classic software development with that of software development in cloud, we observe that there has been a huge change in the frequency of software version releases. Deployment cycles have been reduced from months to days and sometimes even within a few hours the next version is released. This process is referred to continuous delivery(CD) in the cloud computing terms \cite{humble2010continuous}. This is shown in Figure \ref{fig:cd}. 
 		
 		\begin{figure}
 			\begin{center}
-				\makebox[\textwidth]{\includegraphics[width=\textwidth]{2-1}}
+				\makebox[\textwidth]{\includegraphics[width=\textwidth]{2-1.pdf}}
 			\end{center}
 			\caption{Continuous delivery in cloud computing \cite{humble2010continuous}}
 			\label{fig:cd}
 		\end{figure}
 		
-		Most companies make use of \gls{cd} to roll out new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. \gls{cd} has become a huge success and companies such as Google,Facebook etc. adopt \gls{cd} of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months in the case of traditional software development. The feature needs to be delayed until the next release. Whereas in this \gls{cd} approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called perpetual development where the code is always under continuous development and there is no stable release version for a particular product.  	\par Owing to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the user interface of the app, error and warning logs, infrastructure related data etc. are produced. There are existing \gls{apm} tools that collect this data and generate information out of it. Nevertheless, how this information can be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
+		Most companies make use of \gls{cd} to roll out new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. \gls{cd} has become a huge success and companies such as Google,Facebook etc. adopt \gls{cd} of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months in the case of traditional software development. The feature needs to be delayed until the next release. Whereas in this \gls{cd} approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called perpetual development where the code is always under continuous development and there is no stable release version for a particular product.  	\par Due to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the user interface of the app, error and warning logs, infrastructure related data etc. are produced. There are existing \gls{apm} tools that collect this data and generate information out of it. Nevertheless, how this information can be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
 		
 		\subsubsection{Scalability, Reliability  and Availability in Cloud}
 		
 		Some of the monitoring metrics collected include the CPU usage, response time of the request, number of instances the application is hosted on, number of requests each instance serves during a particular time period, error logs of the request etc. While these metrics focus mainly at the infrastructure level, the logs instrumented into the application are also collected. We use these metrics to focus on main challenges of cloud computing: scalability, reliability and availability of cloud applications.
 		
-		\par Scalability is the ability to increase or decrease the resources of an instance or the number of instances so that the changing demand of the incoming requests can be met. The platform related log data collected are utilized to perform scaling. Scaling is of two types: horizontal and vertical scaling. While horizontal scaling focuses on increasing the number of instances, vertical scaling implies increasing the resources of each instance.
+		Scalability is the ability to increase or decrease the resources of an instance or the number of instances so that the changing demand of the incoming requests can be met. The platform related log data collected are utilized to perform scaling. Scaling is of two types: horizontal and vertical scaling. While horizontal scaling focuses on increasing the number of instances, vertical scaling implies increasing the resources of each instance.
 		
 		Scalability is one of the major advantages of cloud computing. Compared to the legacy software applications, cloud computing offers special features of elasticity and scalability. Hence customers can scale their infrastructure/application instances whenever necessary. Scaling can occur at both the platform level and the infrastructure level. While scaling at both levels proves to be important, these two are quite different from each another. 
 		
 		\begin{figure}[!h]
 			\begin{center}
-				\makebox[\textwidth]{\includegraphics[scale = 0.5]{2-2}}
+				\makebox[\textwidth]{\includegraphics[scale = 0.5]{2-2.pdf}}
 			\end{center}
 			\caption{Scaling at two different levels: Platform versus Infrastructure}
 			\label{fig:scaling_infra_platform}
@@ -367,7 +394,7 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
   \end{tabular}
 \end{table}
 	
-	Some other cloud monitoring platforms such as Nimsoft monitoring solution \cite{nimsoft} provide a unified monitoring dashboard to view infrastructures provided by Salesforce, Rackspace, Google or Amazon. Nagios \cite{nagios} is a popular open source cloud monitoring platform that provides monitoring of virtual machines and storage (Amazon EC2 and S3). It also supports OpenStack \cite{openstack}, an open source cloud \gls{iaas}. New Relic \cite{newrelic} is a web-based monitoring service that helps to monitor the application infrastructure and performance, adhering to timeliness, resilience, availability and accuracy. Bruneo et al. \cite{bruneo2015framework} propose a 3D-Cloud Monitoring framework called the Ceiloesper framework, which combines monitoring in multiple layers with real time data and it also performs the data analysis for multiple management actions. It is based on \gls{cep} and uses the Esper \gls{cep} engine.	
+	Some other cloud monitoring platforms such as Nimsoft monitoring solution \cite{nimsoft} provide a unified monitoring dashboard to view infrastructures provided by Salesforce, Rackspace, Google or Amazon. Nagios \cite{nagios} is a popular open source cloud monitoring platform that provides monitoring of virtual machines and storage (Amazon EC2 and S3). It also supports OpenStack \cite{openstack}, an open source cloud \gls{iaas}. New Relic \cite{newrelic} is a web-based monitoring service that helps to monitor the application infrastructure and performance, adhering to timeliness, resilience, availability and accuracy. Bruneo et al. propose a 3D-Cloud Monitoring framework called the Ceiloesper framework, which combines monitoring in multiple layers with real time data and it also performs the data analysis for multiple management actions \cite{bruneo2015framework}. It is based on \gls{cep} and uses the Esper \gls{cep} engine.	
 	
 	\subsection{Auto-scaling}	
 	
@@ -401,17 +428,35 @@ MAPE loop is a solution proposed to solve the problems listed above\cite{lorido2
 
 	\subsection{Data Modeling}
 	
-	Correlation and covariance indicate how closely two variables are related to each other. Correlation could be either positive or negative. If variable Y increases proportionately when variable X is increased by a unit, it is known as positive correlation. On the other hand if the variable Y decreases proportionately when variable X is increased it is a negative correlation. This can be explained graphically as shown in Figure \ref{fig:correlation}. If all the points are centered around the straight line: Y = X, then X and Y are said to be positively correlated. Whereas if all the points are centered around a line Y = -X, then X and Y are said to be inversely correlated. If all the points are scattered throughout then there is no correlation between variables X and Y. Figure \ref{fig:correlation} depicts positive, negative and no correlation. If $X_i$ and $Y_i$ are sample data for the two variables under consideration then correlation can be calculated as \cite{freedman2009statistical}: $ Correlation, r_{xy} = S_{xy} / S_x S_y $ where $S_x$ = sample standard deviation of variable X, $S_y$ = sample standard deviation of variable Y and $S_{xy}$ is the sample covariance of the variables X and Y. 
-\par
-So far only single input variable, X and a single output variable, Y, was considered. However in reality most of the systems tend to be multiple-input multiple-output (MIMO) systems rather than the single-input single-output (SISO) system. The data that is dealt in real world does not contain just 2 attributes. Most of the real world scenarios involve a minimum of 5 to 6 dimensions and depending on the applications this may go as high as 20 or even more \cite{friendly2002corrgrams, li2010judging}. Hence it is important to explore multivariate correlation models: state space models, and polynomial models \cite{ljung1987system, ljung1998system, ljung1999system}.
+	Correlation and covariance indicate how closely two variables are related to each other. Correlation may be either positive or negative as shown in Figure \ref{fig:postivie_corr} and Figure \ref{fig:negative_corr} respectively. If variable Y increases proportionately when variable X is increased by a unit, it is known as positive correlation. On the other hand if the variable Y decreases proportionately when variable X is increased it is a negative correlation. If all the points are centered around the straight line: Y = X, then X and Y are said to be positively correlated. Whereas if all the points are centered around a line Y = -X, then X and Y are said to be inversely correlated. If all the points are scattered throughout then there is no correlation between variables X and Y. This can be explained graphically as shown in Figure \ref{fig:no_corr}. If $X_i$ and $Y_i$ are sample data for the two variables under consideration then correlation can be calculated as: $ Correlation, r_{xy} = S_{xy} / S_x S_y $ where $S_x$ = sample standard deviation of variable X, $S_y$ = sample standard deviation of variable Y and $S_{xy}$ is the sample covariance of the variables X and Y \cite{freedman2009statistical}. 
 
- \begin{figure}
- \begin{center}
-  \makebox[\textwidth]{\includegraphics[width=\textwidth]{B7}}
-\end{center}
-\caption{Positive, negative and no correlation between X and Y }
-\label{fig:correlation}
-\end{figure}
+ 
+ \begin{figure}[H]
+ 	\begin{center}
+ 		\makebox[\textwidth]{\includegraphics[scale=0.33]{Figure11.jpg}}
+ 	\end{center}
+ 	\caption{Positive correlation}
+ 	\label{fig:postivie_corr}
+ \end{figure}
+ 
+ \begin{figure}[H]
+ 	\begin{center}
+ 		\makebox[\textwidth]{\includegraphics[scale=0.33]{Figure12.jpg}}
+ 	\end{center}
+ 	\caption{Negative correlation}
+ 	\label{fig:negative_corr}
+ \end{figure}
+ 
+ \begin{figure}[H]
+ 	\begin{center}
+ 		\makebox[\textwidth]{\includegraphics[scale=0.33]{Figure13.jpg}}
+ 	\end{center}
+ 	\caption{No correlation}
+ 	\label{fig:no_corr}
+ \end{figure}
+ 
+
+So far only single input variable, X and a single output variable, Y, was considered. However in reality most of the systems tend to be multiple-input multiple-output (MIMO) systems rather than the single-input single-output (SISO) system. The data that is dealt in real world does not contain just 2 attributes. Most of the real world scenarios involve a minimum of 5 to 6 dimensions and depending on the applications this may go as high as 20 or even more \cite{friendly2002corrgrams, li2010judging}. Hence it is important to explore multivariate correlation models: state space models, and polynomial models \cite{ljung1987system, ljung1998system, ljung1999system}.
 
 \subsubsection{State Space Models}
 
@@ -506,7 +551,7 @@ Software profiling is a type of program analysis that estimates the space and ti
 
 \item RQ-1: Is there a set of specific methods which will cause performance variations when the source code of these methods are modified? Sandoval et al. state that this is not really true \cite{sandoval2016learning}. This is in contrast to PerfImpact. This approach was tested on 17 open source projects and the results showed that the methods, which cause performance variations before, not necessarily contributed to the performance variations in the newer versions.
 
-\item RQ-2  What are the recurring code changes that affect the performance of an evolving software? The major code changes the caused performance variations are method call addition, method call deletion, method call swap, complete method call change, and loop addition  as compared to the other code changes listed in Table \ref{tab:Table2}. \cite{sandoval2016learning}.
+\item RQ-2  What are the recurring code changes that affect the performance of an evolving software? The major code changes the caused performance variations are method call addition, method call deletion, method call swap, complete method call change, and loop addition  as compared to the other code changes listed in Table \ref{tab:Table2} \cite{sandoval2016learning}.
 
 \end{itemize}
 \end{enumerate}	
@@ -520,9 +565,9 @@ This chapter briefly described the important topics relevant for this thesis. It
  \section{Design and Architecture}	
  \hfill \break
  
- In this chapter the overall architectural design and the three major components of the proposed solution: cloud monitoring, auto-scaling, and data modeling are explained. Cloud monitoring explains about the choice of the metrics collected and how the metric collection is performed and persisted. Auto-scaling details about how it leverages the monitored data to make the relevant scaling decisions. The persisted data is then modeled to find a correlation between the collected metrics and this is discussed under data modeling. 
+ In this chapter, we explain the overall architectural design and the three major components of the proposed solution, which are cloud monitoring, auto-scaling, and data modeling. Under cloud monitoring we discuss the choice of the metrics collected and how the metric collection is performed and persisted. Under auto-scaling, we describe about how the auto-scaler leverages the monitored data to make the relevant scaling decisions. We then model the persisted data to find a suitable correlation between the collected metrics and describe this process under data modeling. 
  
- 	A sample application is deployed to the cloud and monitored continuously. The monitoring metrics of the application are used for modeling. Based on the monitoring service, an auto-scaler is designed. The auto-scaler aids the applications hosted in the cloud to seamlessly scale-out and scale-in depending on several parameters. The cloud application monitoring has paved way for several adaptations both in terms of application (source code changes) and the infrastructure. As mentioned about \gls{fdd}  in Chapter 2, application level adaptation focuses on root cause identification and source code changes. In this design, efficient utilization of the monitoring metrics to perform infrastructure adaptation is considered.  This design focuses in deriving suitable enactment points where necessary scaling decisions are taken. 
+ 	First, we deploy a sample application to the cloud and monitor it continuously. We utilize the monitoring metrics of the application for data modeling. Based on the monitoring service, we design an auto-scaler. The auto-scaler aids the applications hosted in the cloud to seamlessly scale-out and scale-in depending on several parameters. The cloud application monitoring has paved way for several adaptations both in terms of application (source code changes) and the infrastructure. As mentioned about \gls{fdd}  in Chapter 2, application level adaptation focuses on root cause identification and source code changes. In this design, we efficiently utilize  the monitoring metrics to perform infrastructure adaptation.  This design focuses in deriving suitable enactment points where necessary scaling decisions are taken. 
  
 \subsection{System Architecture} 
 
@@ -541,7 +586,7 @@ This chapter briefly described the important topics relevant for this thesis. It
 
  			 \begin{figure}
  			 	\begin{center}
- 			 		\makebox[\textwidth]{\includegraphics[scale=0.79]{C2.pdf}}
+ 			 		\makebox[\textwidth]{\includegraphics[scale=0.79]{3-2.pdf}}
  			 	\end{center}
  			 	\caption{Interaction between components of the proposed design}
  			 	\label{fig:system_component_interaction}
@@ -555,7 +600,7 @@ This chapter briefly described the important topics relevant for this thesis. It
  	
  	 	 \begin{figure}[!h]
  	 	 	\begin{center}
- 	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.6]{C4}}
+ 	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.6]{3-3.pdf}}
  	 	 	\end{center}
  	 	 	\caption{Component interaction between monitoring and scaling service}
  	 	 	\label{fig:monitor_scaling}
@@ -577,7 +622,7 @@ This chapter briefly described the important topics relevant for this thesis. It
 	 
 	  	 	 \begin{figure}[!h]
 	  	 	 	\begin{center}
-	  	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.8]{C3}}
+	  	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.8]{C3.pdf}}
 	  	 	 	\end{center}
 	  	 	 	\caption{Decision process of the auto-scaler}
 	  	 	 	\label{fig:autoscaler}
@@ -603,7 +648,7 @@ This chapter briefly described the important topics relevant for this thesis. It
 
 \begin{figure}[H]
 	\begin{center}
-		\makebox[\textwidth]{\includegraphics[scale = 0.79]{C8}}
+		\makebox[\textwidth]{\includegraphics[scale = 0.79]{C8.pdf}}
 	\end{center}
 	\caption{Validating the model}
 	\label{fig:data_modeling_flowchart}
@@ -653,17 +698,41 @@ The monitoring and scaling services are developed as a java service. The monitor
  
 	\subsection{Deployment of Cloud Application} 
 
- \begin{figure}[!h]
- 	\begin{center}
- 		\makebox[\textwidth]{\includegraphics{D2}}
- 	\end{center}
- 	\caption{Sample manifest.yml file}
- 	\label{fig:sample_manifest}
- \end{figure}
-	
-	Among the three components of the proposed design, the cloud monitoring is the first component. In order to perform cloud application monitoring, a suitable cloud app needs to be developed and deployed to the cloud. In this implementation, the cloud app is deployed to the \gls{hcp} based on \gls{cf} \gls{paas}, which runs on OpenStack \cite{openstack} infrastructure. In order to deploy the app, the developer logs into \gls{cf} using correct credentials and API end point, which is the cloud controller URL of the \gls{cf} instance. $ cf login \: [-a API-URL] \: [-u \: USERNAME] \: [-p \: PASSWORD] $. The app is then deployed to \gls{cf} using the following command: $ cf push \: APP $.		
+% \begin{figure}[!h]
+ %	\begin{center}
+ 	%	\makebox[\textwidth]{\includegraphics{D2}}
+ %	\end{center}
+ %	\caption{Sample manifest.yml file}
+ %	\label{fig:sample_manifest}
+ % \end{figure}
+	Among the three components of the proposed design, the cloud monitoring is the first component. In order to perform cloud application monitoring, a suitable cloud app needs to be developed and deployed to the cloud. In this implementation, the cloud app is deployed to the \gls{hcp} based on \gls{cf} \gls{paas}, which runs on OpenStack \cite{openstack} infrastructure. In order to deploy the app, the developer logs into \gls{cf} using correct credentials and API end point, which is the cloud controller URL of the \gls{cf} instance. $ cf \; login \; [-a API-URL] \; [-u \; USERNAME] \; [-p \; PASSWORD] $. The app is then deployed to \gls{cf} using the following command: $ cf push \; APP $.		
 
-The \gls{cf} push command:  $ cf push  [APPNAME] $, reads the manifest.yml file of the application to be deployed. It takes the application name, instances, memory, buildpack, host and several other optional attributes for the initial deployment of the application from this manifest file. The manifest file can also be provided as a command line argument if the file name is different or if it is present in a different location other than the current project directory. This is usually useful for deploying multiple applications together using a single manifest file as shown in Figure \ref{fig:sample_manifest}.
+The \gls{cf} push command:  $ cf \; push \; [APPNAME] $, reads the manifest.yml file of the application to be deployed. It takes the application name, instances, memory, buildpack, host and several other optional attributes for the initial deployment of the application from this manifest file. The manifest file can also be provided as a command line argument if the file name is different or if it is present in a different location other than the current project directory. This is usually useful for deploying multiple applications together using a single manifest file. The below lines shows the contents of a sample manifest.yml file which deploys two applications named spark and flame with the specified attributes \cite{cf_manifest}. 
+
+	 \begin{lstlisting}	
+	 ---
+	 // the below manifest deploys two applications
+	 // apps are in flame and spark directories
+	 // flame and spark are in fireplace
+	 // cf push should be run from fireplace
+	 applications:
+	 - name: spark
+	 memory: 1G
+	 instances: 2
+	 host: flint-99
+	 domain: shared-domain.example.com
+	 path: ./spark/
+	 services:
+	 - mysql-flint-99
+	 - name: flame
+	 memory: 1G
+	 instances: 2
+	 host: burnin-77
+	 domain: shared-domain.example.com
+	 path: ./flame/
+	 services:
+	 - redis-burnin-77
+	 \end{lstlisting}
 	
 \subsection{Cloud Monitoring Metrics} 
 	
@@ -679,19 +748,12 @@ The deployed cloud app is monitored continuously to collect the various dimensio
 
 \begin{enumerate}
 	\item\textbf{{Average response time of the requests:} }\newline The monitoring service collects all the HTTP requests to the application URL during every 10 second interval.  This is collected from \gls{cf} logs. The logs contain the response time information of each of the HTTP request. We aggregate the response time obtained in that 10 second interval and calculate the average response time. The following lines show a router's log from which the response time needs to be extracted and aggregated.
-	
-	$016-04-18T15:13:12.32+0200 [RTR/0]      OUT \\ masterthesisdemo-d063995.cfapps.sap.hana.ondemand.com\\
-	- [18/04/2016:13:13:12 +0000] "POST /processrequest HTTP/1.1" \\
-	200 0 0 "-" "Java/1.8.0\_74" 192.168.0.107:36027 \\
-	x\_forwarded\_for:"172.18.74.8, 192.168.0.107" \\
-	x\_forwarded\_proto:"https" \\
-	vcap_request_id:d70e4b9e-a08f-411d-584e-042e50d737e2 \\
-	\mathbf{response\_time:0.031885594}  \\
-	app\_id:55b4a61c-ee3b-484c-86c9-e656e99b2a96$
-	
+\begin{lstlisting}	
+	016-04-18T15:13:12.32+0200 [RTR/0] OUT masterthesisdemo-d063995.cfapps.sap.hana.ondemand.com - [18/04/2016:13:13:12 +0000] "POST /processrequest HTTP/1.1" 200 0 0 "-" "Java/1.8.0_74" 192.168.0.107:36027 x_forwarded_for:"172.18.74.8, 192.168.0.107" x_forwarded_proto:"https" vcap_request_id:d70e4b9e-a08f-411d-584e-042e50d737e2 response_time:0.031885594 app_id:55b4a61c-ee3b-484c-86c9-e656e99b2a96
+\end{lstlisting}	
 	\item\textbf{{Throughput: }} \newline From the \gls{cf} logs, the total number of requests can also be counted. This keeps varying depending on the user load at that time. 
 	
-	\item\textbf{{Number of instances the application is running on:}} \newline The  number of application instances that are currently running is retrieved by making a GET request to the \gls{cf} API. \cite{cf_stats}. 
+	\item\textbf{{Number of instances the application is running on:}} \newline The  number of application instances that are currently running is retrieved by making a GET request to the \gls{cf} API \cite{cf_stats}. 
 \begin{lstlisting}
 String url = "https://<cf-target-api>/v2/apps/:guid/stats"; 
 URL obj = new URL(url);
@@ -704,7 +766,9 @@ con.setRequestProperty("Authorization", oAuthToken);
 	
 	\item\textbf{{CPU utilization, memory utilization, and the disk utilization as percentage}} 
 	 The CPU, memory, and disk utilization are fetched from the \gls{cf} API the same way as the number of running instances. The URL for this GET request is:  \newline
-	$ String\ url = "https://<cloud-foundry-target-api-url>/v2/apps/:guid/summary"; $. 
+	\begin{lstlisting} 
+	String url = "https://<cloud-foundry-target-api-url>/v2/apps/:guid/summary"; 
+	\end{lstlisting} 
 	
 \end{enumerate}	
 	
@@ -763,14 +827,15 @@ In the read thread, the logs are parsed to retrieve the response time informatio
  	\label{fig:database_schema_screenshot}
  \end{figure}	
 
-The monitoring service persists the data into this database. A \gls{jdbc} connection to the database is established and the data is inserted into the table using the statement $INSERT\; INTO \;modeldata \;VALUES \;TimeStamp \;AvgResponseTime \;RequestsPerSecond \\ 
-NoInstances \;Memory\_percent\; Disk\_percent \; Cpu\_percent$.
-
+The monitoring service persists the data into this database. A \gls{jdbc} connection to the database is established and the data is inserted into the table using the statement 
+\begin{lstlisting}
+INSERT INTO modeldata VALUES TimeStamp AvgResponseTime RequestsPerSecond NoInstances Memory_percent Disk_percent  Cpu_percent
+\end{lstlisting}
 		
 \end{itemize}	
 \subsubsection{Scaling Service}
 	
-	Parallel to the monitoring service, the scaling service also runs continuously comparing monitoring information with threshold values and \gls{sla}s. The scaling service is invoked as soon as the monitoring begins. The scaling service has a java.util.Timer and this timer schedules a \textit{TimerTask} to occur for every cool down period. The scaling decision could be based on any of the parameters: CPU/memory/disk depending on the application and the metrics. In this implementation, a CPU intensive application is considered and hence CPU utilization is chosen as the decision metric. We can also use a combination of these metrics. The \textit{TimerTask} thread aggregates the average CPU utilization values in the last cool down period. These steps are shown in the below code snippet:
+	Parallel to the monitoring service, the scaling service also runs continuously comparing monitoring information with threshold values and \gls{sla}s. The scaling service is invoked as soon as the monitoring begins. The scaling service has a java.util.Timer and this timer schedules a \textit{TimerTask} to occur for every cool down period. The scaling decision could be based on any of the parameters: CPU/memory/disk depending on the application and the metrics. In this implementation, a CPU intensive application is considered and hence CPU utilization is chosen as the decision metric. We can also use a combination of these metrics. The \textit{TimerTask} thread aggregates the average CPU utilization values in the last cool down period. These steps are shown in the below code snippet:	
 \begin{lstlisting}
 static Timer timer_scale = new Timer ();
 static TimerTask autoscaler = new TimerTask(){
@@ -806,7 +871,8 @@ else if (cpu_avg < Constants.min_cpu_threshold){
 	cf_call.cfLogout();
 }
 \end{lstlisting}
-	The actual scaling task involves making calls to the $cf scale$ command. The scale command takes the number of instances or memory or disk values as parameters as shown in below:
+	The actual scaling task involves making calls to the $cf scale$ command. The \gls{cf} scale command takes the number of instances or memory or disk values as parameters depending on the type of scaling (horizontal or vertical). In the below code snippet, we can see the number of instances(-i) passed as a parameter:
+	
 	\begin{lstlisting}
 public void cfHorizontalScaling(int noInstances, String appName){
  if(!(noInstances >= Constants.min_instances && 
@@ -822,40 +888,34 @@ public void cfHorizontalScaling(int noInstances, String appName){
 	
 	\subsection{Data Modeling}
  
- Data modeling is the final component of the proposed design. The MATLAB System Identification Toolbox is used to find a suitable correlation model. The data from MySQL database table is exported to the MATLAB workspace. The input vectors and output vectors are combined from the datasets as shown below:
+ Data modeling is the final component of the proposed design. The MATLAB System Identification Toolbox is used to perform data modeling to find a suitable correlation model. The data from MySQL database table is exported to the MATLAB workspace. The input vectors and output vectors are combined from the datasets as shown below:
  \begin{lstlisting} 
  input = [requestsPerSecond, noInstances, cpu_percent, memory_percent, 
 						 disk_percent];
  output = [avgResponseTime];
  \end{lstlisting}
   The input and output vectors are imported into the Sytem Identification Toolbox as shown in Figure \ref{fig:dataset_import}. The data is now ready to be split into estimation Data and validation data. To do this, the select range option underneath preprocess combo box has to be clicked as shown in Figure \ref{fig:split_dataset}. 
+  Once the data is split, the datasets are dragged to the corresponding working data area and validation area. Then the model estimation needs to be performed. The model that needs to be estimated for the data needs to be chosen underneath the estimate box. The estimated models include state space models, and polynomial models: ARX and ARMAX models.
   
-      \begin{figure}[h]
+      \begin{figure}[H]
       	\begin{center}
-      		\makebox[\textwidth]{\includegraphics[width=\textwidth]{D7}}
+      		\makebox[\textwidth]{\includegraphics[scale=0.8]{D6}}
+      	\end{center}
+      	\caption{Importing data into System Identification Toolbox}
+      	\label{fig:dataset_import}
+      \end{figure}
+   
+      \begin{figure}[H]
+      	\begin{center}
+      		\makebox[\textwidth]{\includegraphics[scale = 0.5]{D7}}
       	\end{center}
       	\caption{Splitting the data into estimation and validation datasets}
       	\label{fig:split_dataset}
-      \end{figure}
-  
-    \begin{figure}[h]
-    	\begin{center}
-    		\makebox[\textwidth]{\includegraphics[scale=0.75]{D6}}
-    	\end{center}
-    	\caption{Importing data into System Identification Toolbox}
-    	\label{fig:dataset_import}
-    \end{figure}	
- Once the data is split, the datasets are dragged to the corresponding working data area and validation area. Then the model estimation needs to be performed. The model that needs to be estimated for the data needs to be chosen underneath the estimate box. The estimated models include state space models, and polynomial models: ARX and ARMAX models.
-	\begin{itemize}
-		\item{\textbf{State space model}:} The state space mode estimation is shown in Figure \ref{fig:state_space_matlab}. It provides options to specify the model order or to specify a range of orders and the system would suggest which model order would suit best for this scenario. The model order will determine the size of the state variable vector which in turn will determine the output at a certain time in the future, given the inputs at that time.
-		
-		\item{\textbf{ARX and ARMAX models}:} 	Following the state space model estimation polynomial model estimation is done. In this context, ARX and ARMAX models are considered for estimation. In ARX, the orders of the polynomials A and B (na and nb) and the error co-efficients, nk, are specified. This is shown in Figure \ref{fig:ARX_matlab}. For ARMAX modeling, the order of the polynomials A, B and C (na, nb and nc) and the error co-efficients are specified. Figure \ref{fig:ARMAX_matlab} shows this in the System Identification Toolbox.
-		
-	\end{itemize}
-	
+      \end{figure}	
+
 	\begin{figure}[H]
 		\begin{center}
-			\makebox[\textwidth]{\includegraphics[scale=0.8]{E11}}
+			\makebox[\textwidth]{\includegraphics[scale=0.7]{E11}}
 		\end{center}
 		\caption{State space modeling}
 		\label{fig:state_space_matlab}
@@ -863,20 +923,27 @@ public void cfHorizontalScaling(int noInstances, String appName){
 	
 	\begin{figure}[H]
 		\centering
-		\begin{minipage}{.5\textwidth}
+		\begin{minipage}{.4\textwidth}
 			\centering
 			\includegraphics[width=.9\linewidth]{E12}
-			\captionof{figure}{Polynomial model: ARX}
+			\captionof{figure}{ARX model}
 			\label{fig:ARX_matlab}
 			
 		\end{minipage}%
-		\begin{minipage}{.5\textwidth}
+		\begin{minipage}{.4\textwidth}
 			\centering
 			\includegraphics[width=.9\linewidth]{E13}
-			\captionof{figure}{Polynomial model: ARMAX}
+			\captionof{figure}{ARMAX model}
 			\label{fig:ARMAX_matlab}
 		\end{minipage}
 	\end{figure}
+
+	\begin{itemize}
+		\item{\textbf{State space model}:} The state space mode estimation is shown in Figure \ref{fig:state_space_matlab}. It provides options to specify the model order or to specify a range of orders and the system would suggest which model order would suit best for this scenario. The model order will determine the size of the state variable vector which in turn will determine the output at a certain time in the future, given the inputs at that time.
+		
+		\item{\textbf{ARX and ARMAX models}:} 	Following the state space model estimation polynomial model estimation is done. In this context, ARX and ARMAX models are considered for estimation. In ARX, the orders of the polynomials A and B (na and nb) and the error co-efficients, nk, are specified. This is shown in Figure \ref{fig:ARX_matlab}. For ARMAX modeling, the order of the polynomials A, B and C (na, nb and nc) and the error co-efficients are specified. Figure \ref{fig:ARMAX_matlab} shows this in the System Identification Toolbox.
+		
+	\end{itemize}
  
  \cleardoublepage
  
@@ -890,7 +957,7 @@ public void cfHorizontalScaling(int noInstances, String appName){
 We consider a sample web application hosted in the \gls{hcp}. This is a guest book application which provides a web interface for the users to enter the data as shown in Figure \ref{fig:guestbook_ui}. 
  \begin{figure}[h]
  \begin{center}
-  \makebox[\textwidth]{\includegraphics{E1}}
+  \makebox[\textwidth]{\includegraphics[scale = 0.6]{E1}}
 \end{center}
 \caption{User interface of the guest book application}
 \label{fig:guestbook_ui}
@@ -940,50 +1007,58 @@ The manifest file of this application is shown in Figure \ref{fig:guestbook_mani
 	
 	\subsection{Scaling out and scaling in of the the application Instances}
 		
-	In this section, the results of scaling service is demonstrated. As and when the load increases, it can be noted that the scaling service creates and adds more instances of the application. This is because the CPU utilization of the instances go up as our sample application under consideration is a CPU intensive one. This can be verified in the command line console as well. Figure \ref{fig:cf_cli} shows the statistics of application instances in the console. We notice that the CPU column shows a huge spike in the \% utilization of CPU. The scaling out happens until the values falls below the threshold CPU value, which is 80\% for this evaluation.
+	In this section, the results of scaling service are demonstrated. As and when the load increases, it can be noted that the scaling service creates and adds more instances of the application. This is because the CPU utilization of the instances go up as our sample application under consideration is a CPU intensive one. This can be verified in the command line console as well. Figure \ref{fig:cf_cli} shows the statistics of application instances in the console. We notice that the CPU column shows a huge spike in the percentage utilization of CPU. The scaling out happens until the values falls below the threshold CPU value. For this evaluation, the maximum CPU threshold was set to 80\%, which can be verified in Figure \ref{fig:autoscaler_sla_policies}.
 	
-	Figure \ref{fig:responsetTime_Instances} shows the graph indicating the scaling action performed. The graph on top, y1 denotes the load (requests per second). The graph beneath, u1 shows the number of application instances. The x axis indicates the time. In this scenario, about 2000 records were collected and the x axis indicates these relative values. From this graph, it can be inferred that as the load increases, the number of instances also increase up to 7 and then once the load generation is turned off the number of instances reduces back to 1. For this evaluation, 7 is the maximum number of instances, and 1 is the minimum number of instances configured as an SLA. This depicts the scaling out and scaling in procedures. 
+	Figure \ref{fig:responsetTime_Instances} shows the graph indicating the scaling action performed. The graph on top, y1 denotes the load (requests per second). The graph beneath, u1 shows the number of application instances. The x axis indicates the time. In this scenario, about 2000 records were collected and the x axis indicates these relative values. From this graph, it can be inferred that as the load increases, the number of instances also increase up to 7 and then once the load generation is turned off the number of instances reduces back to 1. For this evaluation, 7 is the maximum number of instances, and 1 is the minimum number of instances configured as an \gls{sla}. The \gls{sla} settings screen shot is shown in Figure \ref{fig:autoscaler_sla_policies}. This depicts the scaling out and scaling in procedures. 
 	
-	  \begin{figure}[h]
+	  \begin{figure}[H]
 	  	\begin{center}
 	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E4}}
 	  	\end{center}
 	  	\caption{Stats of the application instances in the command line interface}
 	  	\label{fig:cf_cli}
 	  \end{figure}
+
+  	  \begin{figure}[H]
+  		  	  	\begin{center}
+  		  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{Eprop}}
+  		  	  	\end{center}
+  		  	  	\caption{Properties file where the default SLAs/policies are stored}
+  		  	  	\label{fig:autoscaler_sla_policies}
+  	  \end{figure}
 	  
-	  	  \begin{figure}[h]
+	  	  \begin{figure}[H]
 	  	  	\begin{center}
-	  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E5}}
+	  	  		\makebox[\textwidth]{\includegraphics[scale=0.5]{E5}}
 	  	  	\end{center}
 	  	  	\caption{Graph depicting the correlation between throughput and number of application instances}
 	  	  	\label{fig:responsetTime_Instances}
 	  	  \end{figure}
 	
 	\subsection{Persistence of data in MySQL database}
-		In this section, the results of monitoring service is demonstrated. It continuously collects the information and persists it into the MySQL database.  Figure \ref{fig:db_rows} shows the data stored in the MySql DB. The dimensions persisted are: time stamp of the record, average response time, requests per second, number of instances, memory utilization as percentage, disk utilization as percentage, and CPU \% utilization. The screen shot also shows the number of instances gradually increasing from 1 until 7 which is the minimum and maximum instances set during this evaluation. This can be verified in Figure \ref{fig:autoscaler_sla_policies}, which shows the screen shot of the properties file. 
+		In this section, the results of persistence of the monitoring and scaling services are demonstrated. It continuously collects the information and persists it into the MySQL database.  Figure \ref{fig:db_rows} shows the data stored in the MySql DB. The dimensions persisted are time stamp of the record, average response time, requests per second, number of instances, memory utilization as percentage, disk utilization as percentage, and CPU \% utilization. Depending on the type of scaling and the type of sample application, scaling may be reflected in number of instances (horizontal scaling) or memory/disk (vertical scaling). 
+		
+		As our example application involves horizontal scaling, whenever scaling happens it will be reflected in the number of instances. The screen shot in Figure \ref{fig:db_rows} shows the number of instances gradually increasing from 1 until 7 which is the minimum and maximum instances set during this evaluation. This can be verified in Figure \ref{fig:autoscaler_sla_policies}, which shows the screen shot of the properties file containing the \gls{sla} settings. 
+
 	
-		  	  \begin{figure}[h]
+		  	  \begin{figure}[H]
 		  	  	\begin{center}
 		  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E6}}
 		  	  	\end{center}
 		  	  	\caption{MySQL workbench showing the top rows of the table modeldata}
 		  	  	\label{fig:db_rows}
 		  	  \end{figure}
-		  	  
- 		  	  \begin{figure}[h]
-  	  		  	  	\begin{center}
-  	  		  	  		\makebox[\textwidth]{\includegraphics[width=\textwidth]{Eprop}}
-  	  		  	  	\end{center}
-  	  		  	  	\caption{Properties file where the default SLAs/policies are stored}
-  	  		  	  	\label{fig:autoscaler_sla_policies}
- 		  	  \end{figure}
-		  	  
-		  	  
-	
+		  	 	
 	\subsection{Modeling the collected data}
 	
-	The dataset from MySql databse is exported into the MATLAB workspace. Average response time is estimated to see the performance improvement of the application using auto-scaler. The input and output datasets are now imported to the MATLAB System Identification Toolbox with the name EvalDataSet. Figure \ref{fig:output_responsetime_input_5} depicts the inputs and output graphically. It contains five graphs where the X-axis is time on all the graphs and the Y-axis indicates average response time, requests per second, number of instances, CPU \% utilization, memory \% utilization, and disk \% utilization from the top to bottom respectively.
+	The dataset from MySql databse is exported into the MATLAB workspace. Average response time is estimated to see the performance improvement of the application using auto-scaler. The input and output datasets are now imported to the MATLAB System Identification Toolbox with the name EvalDataSet. The structure of the input and output datasets are as below:
+	
+	\begin{lstlisting} 
+	input = [requestsPerSecond, noInstances, cpu_percent, memory_percent, disk_percent];
+	output = [avgResponseTime];
+	\end{lstlisting} 
+	
+	Figure \ref{fig:output_responsetime_input_5} depicts the inputs and output graphically. It contains six graphs where the first one represents the output dimension and the following five graphs represent the input dimensions. The X-axis is time on all the graphs and the Y-axis indicates average response time, requests per second, number of instances, CPU \% utilization, memory \% utilization, and disk \% utilization from the top to bottom respectively.
 	
 \begin{figure}
 	\begin{center}
@@ -992,7 +1067,9 @@ The manifest file of this application is shown in Figure \ref{fig:guestbook_mani
 	\caption{Graph showing the output Y1: average response time and the inputs U1, U2, U3, U4 and U5: requests per second, number of instances, CPU, memory and disk utilization }
 	\label{fig:output_responsetime_input_5}
 \end{figure}
-This dataset is now split into estimation and validation datasets. The complete dataSet, EvalDataSet, is dragged into the working data area. Select range option is used to split the entire dataset into the estimation and validation datasets: EvalDataSetEstimation and EvalDataSetValidation. The range selection process is shown in Figure \ref{fig:select_range_estimation_validation} . The dataset is split into 80\% and 20\% respectively. The 80\% data is shown in Figure \ref{fig:80_estimation}, which represents the estimation dataset and the 20\% data is shown in Figure \ref{fig:20_validation}, which represents the validation dataset. 
+This dataset is now split into estimation and validation datasets. The complete dataSet, EvalDataSet, is dragged into the working data area. Select range option is used to split the entire dataset into the estimation and validation datasets: EvalDataSetEstimation and EvalDataSetValidation. 
+
+The range selection process is shown in Figure \ref{fig:select_range_estimation_validation} . The dataset is split into 80\% and 20\% respectively. The 80\% data is shown in Figure \ref{fig:80_estimation}, which represents the estimation dataset and the 20\% data is shown in Figure \ref{fig:20_validation}, which represents the validation dataset. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -1020,7 +1097,7 @@ This dataset is now split into estimation and validation datasets. The complete 
 	
 	    \begin{figure}[H]
 	    	\begin{center}
-	    		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E10}}
+	    		\makebox[\textwidth]{\includegraphics[scale = 0.5]{E10}}
 	    	\end{center}
 	    	\caption{Working data and validation data area}
 	    		\label{fig:working_validation_area}
@@ -1035,7 +1112,7 @@ This dataset is now split into estimation and validation datasets. The complete 
 	The models estimated are validated against the validation dataset. The model output checkbox is checked to see the the accuracy of each model. It shows the best fitting models listed in order. This is depicted in Figure \ref{fig:model_output}.
    \begin{figure}[H]
 		    	\begin{center}
-		    		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E14}}
+		    		\makebox[\textwidth]{\includegraphics[scale = 0.35]{E14}}
 		    	\end{center}
 		    	\caption{Model output with the best fits listed}
 		    		\label{fig:model_output}
@@ -1045,7 +1122,7 @@ The previous section shows the models for a dataset which was generated with the
 
    \begin{figure}[H]
    	\begin{center}
-   		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E15}}
+   		\makebox[\textwidth]{\includegraphics[scale = 0.34]{E15}}
    	\end{center}
    	\caption{Response time versus load without an auto-scaler}
    		\label{fig:without_autoscaler}
@@ -1053,7 +1130,7 @@ The previous section shows the models for a dataset which was generated with the
    
       \begin{figure}[H]
       	\begin{center}
-      		\makebox[\textwidth]{\includegraphics[width=\textwidth]{E16}}
+      		\makebox[\textwidth]{\includegraphics[scale = 0.5]{E16}}
       	\end{center}
       	\caption{Response time versus load with an auto-scaler}
       		\label{fig:with_autoscaler}
@@ -1093,7 +1170,7 @@ On the other side, modeling can be improved. A correlation model from the monito
  \hfill  
 
 \emergencystretch 1.5em
-\bibliographystyle{unsrt}
+\bibliographystyle{ieeetr}
 \bibliography{LatexRefThesis}	  
 
 \clearpage
