@@ -222,19 +222,19 @@
  \section{Introduction}
 	 \hfill \break
 	
-		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than locally has led to innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as \gls{aws} \cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial monetary setup costs. DevOps is a very popular term in cloud computing. It refers to the reduction in the gap between developers and operators \cite{httermann2012devops}. Owing to increased amount of run-time information available immediately in the cloud, DevOps benefit a lot. Developers can make use of this information to optimize the code by visualizing run-time behavior, whereas operators can utilize the information to automate resource provisioning and capacity planning.
+		Cloud computing has gained rapid growth and importance in the recent years. The fact that servers are hosted remotely rather than locally has led to the founding of innumerable small scale businesses. Start-ups no longer require huge server infrastructure to be set-up at their locations, instead they can use infrastructure provided by cloud providers such as \gls{aws} \cite{aws}. They just need to pay for the amount of resources that are actually used and this is known as the pay-per-use model \cite{armbrust2010view}. This significantly reduces the initial setup cost. DevOps is a very popular term in cloud computing. It refers to a practise that aims at reducing the gap between developers and operators \cite{httermann2012devops}. Owing to increased amount of run-time information available immediately to the developers, which was previously available only to the operators, has made the DevOps approach very popular. Developers can make use of this information to optimize the code by visualizing run-time behavior, whereas operators can utilize the information to automate resource provisioning and capacity planning.
 		
 		
-		\par This chapter provides us the motivation behind this topic, gives an insight into the problem statement that this thesis aims to solve, summarizes the contribution of the thesis, and finally describes how the following chapters are structured.
+		\par This chapter begins with stating the motivation behind this thesis topic, followed by an insight into the problem statement that this thesis aims to solve, along with a summary of contributions from this work, and finally describes how the following chapters of this thesis are organized.
 	
 	
 	\subsection{Motivation}
 	
-	Cloud computing has caused a change in software engineering. This can be attributed to the flexibility, scalability, and elasticity offered by cloud. Cloud applications are dynamically allocated resources and infrastructure based on the usage and demand of the application. When the app usage is less, resources consumed are also reduced and hence cloud consumers pay less depending on the usage. This proves not only to be elastic but also cost-effective. The elasticity is achieved by continuous monitoring of several metrics that indicate the demand at the moment, and provisioning the necessary resources to meet the monitored demand. Other cloud offerings include automatic scaling, load balancing, and integration with other services such as email services, authentication, etc. Distributed, scalable enterprise-wide applications also mandate the monitoring of metrics that aid the developers and business analysts to reason the effectiveness of their applications \cite{leitner2012application}.
+	Cloud computing has evoked rethinking and reinventing of software engineering. This can be attributed to new principles and system design to improve flexibility, scalability, and elasticity offered by cloud. Cloud applications are dynamically allocated resources and infrastructure based on the usage and demand of the application. When the app usage is less, resources consumed are also reduced and hence cloud consumers pay less depending on the usage. This proves not only to be elastic but also cost-effective. The elasticity is achieved by continuous monitoring of several metrics that indicate the demand at the moment, and provisioning the necessary resources to meet the monitored demand. Other cloud offerings include automatic scaling, load balancing, and integration with other services such as email services, authentication, etc. Distributed, scalable enterprise-wide applications also mandate the monitoring of metrics that aid the developers and business analysts to reason the effectiveness of their applications \cite{leitner2012application}.
 	
 	\par The metrics that are monitored vary depending on the type of the application and the level of the cloud computing stack as shown in Figure \ref{fig:ccstack}. For instance, the metrics such as memory consumption, CPU utilization, network bandwidth utilization are considered to be at the Infrastructure level, whereas some other metrics such as response times of methods/procedures, the number of users accessing the application, maximum number of users who can use the application simultaneously, etc. are considered to be at the platform level. Sometimes, the application level metrics depend on other primitive metrics at the infrastructure level and vice-versa.
 	
-	\par As cloud application development has become more common, the run time monitoring metrics of the applications are easily available through several application performance monitoring (APM) tools such as Amazon cloudwatch, New Relic, etc. Though a vast amount of information is made available through \gls{apm} tools to the DevOps, how often the information is utilized is still an open question. \gls{apm} tools do not provide any direct accessible feedback to the developers or operators, and hence most of the DevOps do not use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that take a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment takes place. This type of analytic and predictive feedback can be provided to the developers in their \gls{ide}s which otherwise may not be explored by the developers. This is because the information collected by \gls{apm} tools are huge amount of log data that are quite tedious for manual interpretation. At the same time, on the cloud operations side, this information can be leveraged to provide automation of infrastructure provisioning and capacity planning. This technique of providing useful information from the monitoring data is known as Feedback driven development \cite{cito2015runtime}. \gls{fdd} that provides useful tools to the cloud DevOps is the focus of this Thesis.	
+	\par With the growing popularity and adoption of cloud based developments, the run time monitoring metrics of the applications are easily available through several application performance monitoring (APM) tools such as \textit{Amazon cloudwatch, New Relic, etc} \cite{cloudwatch, newrelic}.  Though a vast amount of information is made available through \gls{apm} tools to the DevOps, the effective utilization of this information is still an open question. \gls{apm} tools do not provide any actionable insights as feedback to the developers or operators, and hence most of the DevOps do not tend to use it. However, this run-time monitoring data could be used to provide useful analytic information such as performance hotspots that take a lot of execution time, and predictive information such as methods or loops that may become critical, even before the deployment takes place. This type of analytic and predictive feedback can be provided to the developers in their \gls{ide}s which otherwise may not be explored by the developers. This is because the information collected by \gls{apm} tools are huge amount of log data that are quite tedious for manual interpretation. At the same time, on the cloud operations side, this information can be leveraged to provide automation of infrastructure provisioning and capacity planning. This technique of providing useful information from the monitoring data is known as Feedback driven development \cite{cito2015runtime}. \gls{fdd} that provides useful tools to the cloud DevOps is the focus of this Thesis.	
 	
 	\subsection{Problem Statement}	
 	
@@ -262,16 +262,16 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 
 \begin{itemize}
 	\item \textbf{Impact of cloud computing on DevOps:}
-	Development and operations are brought much closer than the traditional software methods. Sometimes the same person acts as both the developer and operator. The cloud DevOps are forced to look into the huge amount of run time log data of the cloud applications. However, performing this manually proves to be extremely tedious. This imposes a need for automation tools for DevOps.
+	The blending of software development and operational processes has brought in a new combined responsibility. The cloud DevOps are obliged to look into the huge amount of run time log data of the cloud applications. However, performing this manually proves to be extremely tedious and eventually leads to DevOps overlooking the information, which otherwise could support critical performance decision making. This imposes a need for automation tools for DevOps.
 	
 	\item \textbf{Data and tools utilized by DevOps:}
-	The data produced by the logs include business metrics, system information, usage metrics etc. and this information can be mined to predict performance/monetary implications of the cloud application in advance. Hence it can be argued that when the operational metrics are brought closer to the DevOps, they would be able to improve the performance and cost-effectiveness of the application.
+	The data produced by the logs include business metrics, system information, usage metrics etc. and these information can be mined to predict performance/monetary implications of the cloud application in advance. Hence, when the operational metrics are brought closer to the DevOps in an automated manner, they would be able to improve the performance and cost-effectiveness of the application. Unfortunately this issue is currently not addressed and the need for improving existing DevOps automation tools is evident.
 	
 \end{itemize}
  
 	\subsection{Contribution}	
 	
-	From the above mentioned issues, it is therefore important to monitor relevant information and provide efficient automated tools to the DevOps for improving cloud application performance. In this thesis, a new monitoring-scaling framework is designed and implemented. It leverages monitoring metrics such as response time of requests, throughput, CPU utilization etc. Bruneo et al.\cite{bruneo2015framework} define a framework that monitors the cloud defined by a 3-D cloud monitoring model, where each of the dimension correspond to the different layers of the cloud computing stack. Considering these issues, it is certainly important how these cloud monitoring information can be leveraged to make a useful impact for the cloud developers and operators. 
+	From the above mentioned issues, it is therefore important to monitor relevant information and provide efficient automated tools to the DevOps for improving cloud application performance. In this thesis, a new \textit{monitoring and scaling framework} is designed and implemented. It leverages monitoring metrics such as \textit{response time of requests, number of incoming requests, CPU utilization, memory and disk utilization.} Bruneo et al.\cite{bruneo2015framework} define a framework that monitors the cloud defined by a 3-D cloud monitoring model, where each of the dimension correspond to the different layers of the cloud computing stack. Considering these issues, it is certainly important how these cloud monitoring information can be leveraged to make a useful impact for the cloud developers and operators. 
 	
 	The thesis contributes a new auto-scaling system that can be adapted to any cloud platform. It proposes a new monitoring system that collects relevant metrics to make important scaling decisions. Using the collected metrics, the design aims to provide an efficient feedback to the cloud DevOps. The collected feedback is integrated into the development environment (\gls{ide}s) so that developers are able to utilize the feedback to make their applications better scalable and highly available \cite{cito2015runtime}. On the other hand, this feedback can also be leveraged to automate configuration management and to facilitate dynamic infrastructure provisioning. In this thesis, the monitoring metrics are aggregated for a sufficient period to make scaling decision. Scaling decisions can depend on a single metric or even a combination of metrics that can be customized by the cloud application developer. 
 	
@@ -281,15 +281,15 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 
 	\par The rest of the thesis is structured into five chapters.
 	
-	Chapter 2 includes background information and presents the state of the art of topics related to this thesis: cloud monitoring, auto-scaling, data modeling, and feedback driven development. 
+	Chapter 2 includes background information and presents the state of the art of topics related to this thesis: \textit{cloud monitoring, auto-scaling, data modeling, and feedback driven development.} 
 	
-	Chapter 3 provides an overview of the high-level system design made in this research work. It proposes a new cloud monitoring-scaling framework for making the cloud applications scalable. It also provides a design for deriving a correlation model for the monitored metrics.
+	Chapter 3 provides an overview of the high-level system design made in this research work. It proposes a new cloud \textit{monitoring and scaling framework} for making the cloud applications scalable. It also provides a design for deriving a correlation model for the monitored metrics.
 	
-	Chapter 4 explains the implementation of the proposed design on a lower fine-grained level. Interesting implementation details, the tools and technologies used,  and the system footprint are also provided.  
+	Chapter 4 explains the implementation of the proposed design on a fine-grained level. Interesting implementation details, the tools and technologies used, and the system footprint are also provided.  
 	
 	Chapter 5 evaluates the implemented system and illustrates the monitoring and scaling of a sample application. The metrics monitored are modeled and a correlation model is derived as well. 
 	
-	Finally, chapter 6 concludes the thesis and outlines future work ideas.
+	Finally, chapter 6 concludes the thesis and outlines extensible ideas for future work.
 
 % Example of Footnote    
 %     \textbf{Alle Vordefinierten Texte sind, wie verbindlich vorgeschrieben, in der hessischen Amtssprache
@@ -301,11 +301,11 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
  \section{State of the Art}
   \hfill \break
  	
-	This chapter presents the state of art of the topics relevant for this thesis. We explain the properties of cloud computing such as continuous delivery, scalability, reliability and availability. We also discuss the state of the art concerning the following topics in detail: \gls{fdd}, cloud monitoring, auto-scaling, data modeling, and performance analysis using source code history in evolving software.
+	This chapter presents the state of art of the topics relevant for this thesis. We explain the properties of cloud computing such as continuous delivery, scalability, and elasticity. We also discuss the state of the art concerning the following topics in detail: \gls{fdd}, cloud monitoring, auto-scaling, data modeling, and performance analysis using source code history in evolving software.
 	
 		\subsection{Cloud computing basic concepts}
 		
-		In this section, we explain software release cycles in cloud applications. We also brief about aspects such as scalability, reliability and availability in cloud.
+		In this section, we explain software release cycles in cloud applications. We also brief about aspects such as scalability and elasticity in cloud.
 		
 		\subsubsection{Continuous delivery in cloud development}
 		If we compare classic software development with that of software development in cloud, we observe that there has been a huge change in the frequency of software version releases. Deployment cycles have been reduced from months to days and sometimes even within a few hours the next version is released. This process is referred to continuous delivery(CD) in the cloud computing terms \cite{humble2010continuous}. This is shown in Figure \ref{fig:cd}. 
@@ -320,9 +320,9 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 		
 		Most companies make use of \gls{cd} to roll out new features and evaluate their new ideas in a controlled manner \cite{kohavi2007practical}. \gls{cd} has become a huge success and companies such as Google,Facebook etc. adopt \gls{cd} of varying degrees for some of their services. When a feature is delayed for the current roll-out, it gets delayed by months in the case of traditional software development. The feature needs to be delayed until the next release. Whereas in this \gls{cd} approach the next release could be in the same day or in the same week, leading to small changes of production code. This also leads to a state called perpetual development where the code is always under continuous development and there is no stable release version for a particular product.  	\par Due to this new release paradigm, there are a lot of extra information generated. The live performance of the application, click-streams from the user interface of the app, error and warning logs, infrastructure related data etc. are produced. There are existing \gls{apm} tools that collect this data and generate information out of it. Nevertheless, how this information can be made effective to the software developers or cloud operators in their daily routine is a topic that is not discussed very often. 
 		
-		\subsubsection{Scalability, Reliability  and Availability in Cloud}
+		\subsubsection{Scalability and Elasticity  in Cloud}
 		
-		Some of the monitoring metrics collected include the CPU usage, response time of the request, number of instances the application is hosted on, number of requests each instance serves during a particular time period, error logs of the request etc. While these metrics focus mainly at the infrastructure level, the logs instrumented into the application are also collected. We use these metrics to focus on main challenges of cloud computing: scalability, reliability and availability of cloud applications.
+		Some of the monitoring metrics collected include the CPU usage, response time of the request, number of instances the application is hosted on, number of requests each instance serves during a particular time period, error logs of the request etc. While these metrics focus mainly at the infrastructure level, the logs instrumented into the application are also collected. We use these metrics to focus on main challenges of cloud computing: scalability and elasticity of cloud applications \cite{furht2010handbook}.
 		
 		Scalability is the ability to increase or decrease the resources of an instance or the number of instances so that the changing demand of the incoming requests can be met. The platform related log data collected are utilized to perform scaling. Scaling is of two types: horizontal and vertical scaling. While horizontal scaling focuses on increasing the number of instances, vertical scaling implies increasing the resources of each instance.
 		
@@ -339,8 +339,6 @@ The cloud computing stack consists of the three layers as shown in Figure \ref{f
 		Infrastructure scaling involves adding or removing virtual machines or server nodes whereas platform scaling involves adding or removing additional instances of the application itself. It is certainly important to have both infrastructure and application scaling when a \gls{paas} is considered. For enterprise IT services, it becomes quite important to evaluate if the application can also scale seamlessly. It may not be sufficient if the infrastructure scales while the application does not \cite{app_infra_scale}. 
 		
 		Figure \ref{fig:scaling_infra_platform} depicts this distinction between platform and infrastructure scaling. It displays multiple virtual machines at the infrastructure layer and multiple application instances at the platform layer. Depending on implementations, sometimes application scaling could demand scaling infrastructure as well \cite{cf_scale}. This needs to be handled by the \gls{paas}. 
-		
-		\par Availability is one of the major goals of cloud computing. It means that the cloud services need to be available and accessible at anytime from anywhere. For business to happen continuously, it is necessary for the services to be highly available. The definition of availability is specified by the different cloud vendors in their \gls{sla}. For example, google search is known for its high availability.	
 		
 		\subsection{Feedback Driven Development } 		
 		
@@ -557,7 +555,9 @@ Software profiling is a type of program analysis that estimates the space and ti
 \end{enumerate}	
 
 \subsection{Background Summary}
-This chapter briefly described the important topics relevant for this thesis. It briefed about \gls{fdd} and importance of scalability in cloud and described the differences of scaling in PaaS and IaaS. It also provided details of existing monitoring frameworks. Based on this, a new system is proposed to identify relevant cloud monitoring metrics that can be used to automatically perform scaling at the platform level. The metrics are collected and modeled to find a suitable correlation model. State space models and polynomial models are estimated for the collected metrics.
+This chapter briefly described the important topics relevant for this thesis. It briefed about \gls{fdd} and importance of scalability in cloud and described the differences of scaling in PaaS and IaaS. It also provided details of existing monitoring frameworks. Based on this, a new system is proposed to identify relevant cloud monitoring metrics that can be used to automatically perform scaling at the platform level. The metrics are collected and modeled to find a suitable correlation model. State space models and polynomial models are estimated for the collected metrics. 
+
+The two directions discussed in this chapter where cloud monitoring proves to be extremely useful are \textit{auto-scaling} and \textit{root-cause-identification of performance issues using source code history}. In this thesis, we explore further in the direction of auto-scaling and propose a new monitoring and scaling framework that can be used in any \gls{paas}. The collected metrics are further modelled to derive a suitable correlation model between the metrics.
 	
  \cleardoublepage
 
@@ -622,7 +622,7 @@ This chapter briefly described the important topics relevant for this thesis. It
 	 
 	  	 	 \begin{figure}[!h]
 	  	 	 	\begin{center}
-	  	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.8]{C3.pdf}}
+	  	 	 		\makebox[\textwidth]{\includegraphics[scale = 0.8]{3-4.pdf}}
 	  	 	 	\end{center}
 	  	 	 	\caption{Decision process of the auto-scaler}
 	  	 	 	\label{fig:autoscaler}
@@ -648,7 +648,7 @@ This chapter briefly described the important topics relevant for this thesis. It
 
 \begin{figure}[H]
 	\begin{center}
-		\makebox[\textwidth]{\includegraphics[scale = 0.79]{C8.pdf}}
+		\makebox[\textwidth]{\includegraphics[scale = 0.79]{3-5.pdf}}
 	\end{center}
 	\caption{Validating the model}
 	\label{fig:data_modeling_flowchart}
@@ -1161,7 +1161,7 @@ The monitoring data collected for making scaling decisions are also modeled to i
  
 \subsection{Future Work}
 
-We envision the following research directions. On one side, the rule based auto-scaler can be enhanced to combine the different metrics on which the scaling decision depends. Also the threshold values on which the scaling decisions are made can be verified to find a better threshold if applicable. This will involve testing the existing prototype on different types of applications to choose the right combination of metrics and the right minimum and maximum thresholds. 
+We envision the following research directions. On one side, the rule based auto-scaler can be enhanced to combine the different metrics on which the scaling decision depends. It can also be designed to include custom metrics that can be provided by the developers on which scaling should happen. Additionally the threshold values on which the scaling decisions are made can be verified to find a better threshold if applicable. This will involve testing the existing prototype on different types of applications to choose the right combination of metrics and the right minimum and maximum thresholds. 
 
 On the other side, modeling can be improved. A correlation model from the monitored metrics is derived. Modeling can be enhanced to achieve a better accuracy. In order to do this, larger monitoring datasets would be required. Additionally, the script can be automated and used for modeling each application. This way a dynamic model, depending on the application on which the auto-scaler is run, is derived. Using this dynamic model, predictions of the response times customized for each application can be provided. These predictions can in turn be used in making the rule-based auto-scaler a proactive one. 
 
